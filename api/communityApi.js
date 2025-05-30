@@ -2,6 +2,20 @@
  * 社区相关API
  */
 const { request } = require('./request');
+const { getConfig } = require('../config/env');
+
+// 本地存储键名
+const STORAGE_KEY = 'community_posts';
+
+// 获取本地帖子
+function getLocalPosts() {
+  return wx.getStorageSync(STORAGE_KEY) || [];
+}
+
+// 保存帖子到本地
+function saveLocalPosts(posts) {
+  wx.setStorageSync(STORAGE_KEY, posts);
+}
 
 /**
  * 获取社区动态列表
@@ -9,20 +23,36 @@ const { request } = require('./request');
  * @returns {Promise}
  */
 const getPostList = (data = {}) => {
+  const config = getConfig();
+
+  // 如果启用模拟数据，优先从本地存储读取
+  if (config.mockData) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        let posts = getLocalPosts();
+        if (posts.length === 0) {
+          posts = generateMockPosts();
+          saveLocalPosts(posts);
+        }
+        resolve(posts);
+      }, 300);
+    });
+  }
+
+  // 真实请求，失败时仍使用模拟数据
   return new Promise((resolve, reject) => {
     request('/community/posts', data)
       .then(res => {
-        // 如果成功获取数据但列表为空，创建模拟数据
         if (!res || !res.posts || res.posts.length === 0) {
           console.log('使用模拟数据代替空列表');
-          resolve(generateMockPosts());
+          const mock = generateMockPosts();
+          resolve(mock);
         } else {
           resolve(res);
         }
       })
       .catch(err => {
         console.error('获取帖子列表失败:', err);
-        // 返回模拟数据
         console.log('请求失败，使用模拟数据');
         resolve(generateMockPosts());
       });
@@ -100,7 +130,8 @@ const generateMockPosts = () => {
       time: formatTimeAgo(postTime),
       likes: Math.floor(Math.random() * 50),
       comments: Math.floor(Math.random() * 20),
-      isLiked: Math.random() > 0.5
+      isLiked: Math.random() > 0.5,
+      commentList: []
     });
   }
   
@@ -162,18 +193,43 @@ const likePost = (data = {}) => {
   const reqData = {
     post_id: data.postId
   };
-  
+
+  const config = getConfig();
+
+  if (config.mockData) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const posts = getLocalPosts();
+        const index = posts.findIndex(p => p.id === data.postId);
+        if (index !== -1) {
+          const post = posts[index];
+          let isLiked;
+          if (data.action === 'like') {
+            isLiked = true;
+          } else if (data.action === 'unlike') {
+            isLiked = false;
+          } else {
+            isLiked = !post.isLiked;
+          }
+          post.isLiked = isLiked;
+          post.likes = Math.max(0, isLiked ? post.likes + 1 : post.likes - 1);
+          posts[index] = post;
+          saveLocalPosts(posts);
+          resolve({ is_liked: post.isLiked, likes_count: post.likes, likes: post.likes });
+        } else {
+          resolve({ is_liked: false, likes_count: 0, likes: 0 });
+        }
+      }, 300);
+    });
+  }
+
   return new Promise((resolve, reject) => {
     request('/community/like/toggle', reqData)
       .then(res => {
-        // 确保返回结果同时包含likes和likes_count字段以兼容前后端
         if (res) {
-          // 如果服务器返回likes_count但没有返回likes，添加likes字段
           if (res.likes_count !== undefined && res.likes === undefined) {
             res.likes = res.likes_count;
-          }
-          // 如果服务器返回likes但没有返回likes_count，添加likes_count字段
-          else if (res.likes !== undefined && res.likes_count === undefined) {
+          } else if (res.likes !== undefined && res.likes_count === undefined) {
             res.likes_count = res.likes;
           }
         }
@@ -181,10 +237,8 @@ const likePost = (data = {}) => {
       })
       .catch(err => {
         console.error('点赞请求失败:', err);
-        // 如果是"动态不存在"错误，返回模拟数据
         if (err && err.message && err.message.includes('动态不存在')) {
           console.log('使用模拟数据替代');
-          // 返回模拟的点赞结果，确保同时包含likes和likes_count
           const likes_count = Math.floor(Math.random() * 50) + 5;
           const mockResult = {
             is_liked: !data.action || data.action === 'like',
@@ -193,7 +247,6 @@ const likePost = (data = {}) => {
           };
           resolve(mockResult);
         } else {
-          // 其他错误正常拒绝
           reject(err);
         }
       });
@@ -206,6 +259,29 @@ const likePost = (data = {}) => {
  * @returns {Promise}
  */
 const commentPost = (data = {}) => {
+  const config = getConfig();
+
+  if (config.mockData) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const posts = getLocalPosts();
+        const index = posts.findIndex(p => p.id === data.postId);
+        if (index !== -1) {
+          const post = posts[index];
+          const commentId = Date.now();
+          post.commentList = post.commentList || [];
+          post.commentList.push({ id: commentId, user: { name: '我' }, content: data.content });
+          post.comments = (post.comments || 0) + 1;
+          posts[index] = post;
+          saveLocalPosts(posts);
+          resolve({ comment_id: commentId, success: true });
+        } else {
+          resolve({ comment_id: 0, success: false });
+        }
+      }, 300);
+    });
+  }
+
   return request('/community/post/comment', data);
 };
 
