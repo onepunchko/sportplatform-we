@@ -14,6 +14,16 @@ App({
     // 检查登录状态
     this.checkLoginStatus();
   },
+
+  onShow: function() {
+    // 再次检查登录状态，防止token过期
+    this.checkLoginStatus();
+
+    // 根据检查结果决定是否跳转登录页
+    this.checkNeedLogin().catch(err => {
+      console.error('自动跳转登录失败:', err);
+    });
+  },
   
   /**
    * 检查登录状态
@@ -69,28 +79,39 @@ App({
    */
   checkNeedLogin: function() {
     return new Promise((resolve, reject) => {
+      const pages = getCurrentPages();
+      const currentRoute = pages.length ? pages[pages.length - 1].route : '';
+
       if (!this.globalData.isLogin) {
         // 未登录，跳转到登录页
-        wx.reLaunch({
-          url: '/pages/login/login',
-          success: function() {
-            resolve(false);
-          },
-          fail: function(err) {
-            reject(err);
-          }
-        });
+        if (currentRoute !== 'pages/login/login') {
+          wx.reLaunch({
+            url: '/pages/login/login',
+            success: function() {
+              resolve(false);
+            },
+            fail: function(err) {
+              reject(err);
+            }
+          });
+        } else {
+          resolve(false);
+        }
       } else if (!this.globalData.hasUserInfo) {
         // 已登录但用户信息不完整，跳转到用户信息完善页
-        wx.navigateTo({
-          url: '/pages/user-profile/user-profile',
-          success: function() {
-            resolve(false);
-          },
-          fail: function(err) {
-            reject(err);
-          }
-        });
+        if (currentRoute !== 'pages/user-profile/user-profile') {
+          wx.navigateTo({
+            url: '/pages/user-profile/user-profile',
+            success: function() {
+              resolve(false);
+            },
+            fail: function(err) {
+              reject(err);
+            }
+          });
+        } else {
+          resolve(false);
+        }
       } else {
         // 已登录且信息完整
         resolve(true);
