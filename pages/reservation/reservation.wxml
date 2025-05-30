@@ -1,0 +1,114 @@
+<!-- pages/reservation/reservation.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="title">场地预约</view>
+    <view class="header-actions">
+      <view class="my-reservation-icon" bindtap="showMyReservations">
+        <image src="/static/images/calendar.png" mode="aspectFit"></image>
+      </view>
+      <view class="search-icon" bindtap="goToSearch">
+        <image src="/static/images/search.png" mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="filter-tabs">
+    <scroll-view scroll-x class="filter-scroll">
+      <view class="filter-item {{selectedVenueType === 'all' ? 'active' : ''}}" 
+            bindtap="selectVenueType" data-type="all">
+        全部
+      </view>
+      <view class="filter-item {{selectedVenueType === 'basketball' ? 'active' : ''}}" 
+            bindtap="selectVenueType" data-type="basketball">
+        篮球场
+      </view>
+      <view class="filter-item {{selectedVenueType === 'badminton' ? 'active' : ''}}" 
+            bindtap="selectVenueType" data-type="badminton">
+        羽毛球馆
+      </view>
+      <view class="filter-item {{selectedVenueType === 'pingpong' ? 'active' : ''}}" 
+            bindtap="selectVenueType" data-type="pingpong">
+        乒乓球室
+      </view>
+      <view class="filter-item {{selectedVenueType === 'football' ? 'active' : ''}}" 
+            bindtap="selectVenueType" data-type="football">
+        足球场
+      </view>
+      <view class="filter-item {{selectedVenueType === 'swimming' ? 'active' : ''}}" 
+            bindtap="selectVenueType" data-type="swimming">
+        游泳馆
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section-title">附近场馆</view>
+
+  <view class="venue-list">
+    <block wx:for="{{venues}}" wx:key="id">
+      <view class="venue-card" bindtap="goToVenueDetail" data-id="{{item.id}}">
+        <image class="venue-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="venue-info">
+          <view class="venue-name">{{item.name}}</view>
+          <view class="venue-location">
+            <image class="location-icon" src="/static/images/location.png" mode="aspectFit"></image>
+            <text>距离{{item.distance}}</text>
+          </view>
+          <view class="venue-rating">
+            <image class="star-icon" src="/static/images/star.png" mode="aspectFit"></image>
+            <text class="rating-value">{{item.rating}}</text>
+            <text class="rating-count">({{item.reviews}})</text>
+            <text class="venue-price">¥{{item.price}}/小时</text>
+          </view>
+        </view>
+        <view class="venue-status {{item.open ? 'open' : 'closed'}}">
+          {{item.open ? '开放中' : '已关闭'}}
+        </view>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 我的预约弹窗 -->
+  <view class="my-reservations-popup" wx:if="{{showMyReservationsPopup}}">
+    <view class="popup-mask" bindtap="hideMyReservations"></view>
+    <view class="popup-content">
+      <view class="popup-header">
+        <view class="popup-title">我的预约</view>
+        <view class="popup-close" bindtap="hideMyReservations">
+          <image src="/static/images/close.png" mode="aspectFit"></image>
+        </view>
+      </view>
+      
+      <scroll-view scroll-y class="popup-body">
+        <block wx:if="{{myReservations.length > 0}}">
+          <view class="reservation-item" wx:for="{{myReservations}}" wx:key="id">
+            <view class="reservation-venue-info">
+              <image class="reservation-venue-image" src="{{item.venue_image}}" mode="aspectFill"></image>
+              <view class="reservation-details">
+                <view class="reservation-venue-name">{{item.venue_name}}</view>
+                <view class="reservation-time">
+                  <text class="reservation-date">{{item.date}}</text>
+                  <text class="reservation-hour">{{item.start_time}}-{{item.end_time}}</text>
+                </view>
+                <view class="reservation-status {{item.status}}">{{item.status === 'confirmed' ? '已确认' : item.status === 'cancelled' ? '已取消' : '待确认'}}</view>
+              </view>
+            </view>
+            <view class="reservation-actions">
+              <button 
+                class="btn-cancel" 
+                wx:if="{{item.status === 'confirmed'}}" 
+                bindtap="cancelReservation" 
+                data-id="{{item.id}}">取消预约</button>
+            </view>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="empty-reservations">
+            <image class="empty-icon" src="/static/images/empty-calendar.png" mode="aspectFit"></image>
+            <text class="empty-text">暂无预约记录</text>
+            <text class="empty-tip">浏览场馆并预约您喜欢的场地</text>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+</view> 

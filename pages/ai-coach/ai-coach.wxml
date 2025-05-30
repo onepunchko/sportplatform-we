@@ -1,0 +1,108 @@
+<!--pages/ai-coach/ai-coach.wxml-->
+<view class="ai-coach-container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="title">AI智能教练</view>
+    <view class="subtitle">专业运动指导，随时为您服务</view>
+  </view>
+
+  <!-- 聊天内容区域 -->
+  <scroll-view 
+    scroll-y="true" 
+    class="chat-container"
+    scroll-into-view="{{scrollToMessage}}"
+    scroll-with-animation="true"
+    bindscrolltoupper="loadMoreMessages"
+  >
+    <!-- 欢迎消息 -->
+    <view class="welcome-message" wx:if="{{messages.length === 0}}">
+      <view class="welcome-title">你好，我是你的AI运动教练!</view>
+      <view class="welcome-text">你可以向我咨询任何与运动健康相关的问题</view>
+    </view>
+
+    <!-- 聊天消息列表 -->
+    <block wx:for="{{messages}}" wx:key="id">
+      <!-- 用户消息 -->
+      <view class="message user-message" wx:if="{{item.type === 'user'}}">
+        <view class="message-content">{{item.content}}</view>
+        <view class="avatar user-avatar">
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+      </view>
+      
+      <!-- AI消息 -->
+      <view class="message ai-message" wx:else id="msg-{{item.id}}">
+        <view class="avatar ai-avatar">
+          <image src="/static/images/ai-coach.png"></image>
+        </view>
+        <view class="message-content {{item.isStreaming ? 'typing-effect' : ''}}">
+          <!-- 使用rich-text渲染Markdown内容 -->
+          <block wx:if="{{item.isStreaming}}">
+            {{item.content}}
+          </block>
+          <block wx:else>
+            <rich-text class="rich-text-md" nodes="{{item.htmlContent}}"></rich-text>
+          </block>
+          
+          <!-- 如果有建议的训练计划，显示卡片 -->
+          <view class="training-plan" wx:if="{{item.trainingPlan}}">
+            <view class="plan-title">{{item.trainingPlan.title}}</view>
+            <view class="plan-description">{{item.trainingPlan.description}}</view>
+            <view class="plan-tags">
+              <view class="plan-tag" wx:for="{{item.trainingPlan.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</view>
+            </view>
+            <button class="save-plan-btn" data-plan="{{item.trainingPlan}}" bindtap="savePlan">保存此计划</button>
+          </view>
+          
+          <!-- 建议的后续问题 -->
+          <view class="suggestions" wx:if="{{item.suggestions && item.suggestions.length > 0}}">
+            <view 
+              class="suggestion-item" 
+              wx:for="{{item.suggestions}}" 
+              wx:key="*this" 
+              wx:for-item="suggestion"
+              bindtap="selectSuggestion"
+              data-suggestion="{{suggestion}}"
+            >
+              {{suggestion}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 正在输入提示 -->
+    <view class="message ai-message typing" wx:if="{{isTyping}}">
+      <view class="avatar ai-avatar">
+        <image src="/static/images/ai-coach.png"></image>
+      </view>
+      <view class="typing-dots">
+        <view class="dot"></view>
+        <view class="dot"></view>
+        <view class="dot"></view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部输入区域 -->
+  <view class="input-container">
+    <view class="quick-questions">
+      <view class="question-tag" bindtap="askQuestion" data-question="如何开始跑步训练?">如何开始跑步训练?</view>
+      <view class="question-tag" bindtap="askQuestion" data-question="有什么增肌饮食建议?">有什么增肌饮食建议?</view>
+      <view class="question-tag" bindtap="askQuestion" data-question="如何改善柔韧性?">如何改善柔韧性?</view>
+    </view>
+    
+    <view class="input-area">
+      <input 
+        class="message-input" 
+        placeholder="输入你的问题..." 
+        value="{{inputValue}}"
+        bindinput="handleInputChange"
+        bindconfirm="sendMessage"
+        confirm-type="send"
+        cursor-spacing="20"
+      />
+      <view class="send-btn" bindtap="sendMessage">发送</view>
+    </view>
+  </view>
+</view>

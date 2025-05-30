@@ -1,0 +1,68 @@
+<!-- 小程序顶部状态栏 -->
+<div class="ios-status-bar bg-black text-white flex justify-between items-center px-5 py-2 text-xs">
+    <span>10:30</span>
+    <div class="flex items-center space-x-1">
+        <i class="fas fa-signal"></i>
+        <i class="fas fa-wifi"></i>
+        <i class="fas fa-battery-full"></i>
+    </div>
+</div>
+
+<!-- 小程序底部导航栏 -->
+<div class="tab-bar fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center py-2 text-xs">
+    <a href="home.html" class="tab-item flex flex-col items-center">
+        <i class="fas fa-home text-base mb-1"></i>
+        <span>首页</span>
+    </a>
+    <a href="tracking.html" class="tab-item flex flex-col items-center">
+        <i class="fas fa-running text-base mb-1"></i>
+        <span>运动追踪</span>
+    </a>
+    <a href="reservation.html" class="tab-item flex flex-col items-center">
+        <i class="fas fa-calendar-check text-base mb-1"></i>
+        <span>场地预约</span>
+    </a>
+    <a href="community.html" class="tab-item flex flex-col items-center">
+        <i class="fas fa-users text-base mb-1"></i>
+        <span>运动社区</span>
+    </a>
+    <a href="profile.html" class="tab-item flex flex-col items-center">
+        <i class="fas fa-user text-base mb-1"></i>
+        <span>个人资料</span>
+    </a>
+</div>
+
+<!-- 样式 -->
+<style>
+    .ios-status-bar {
+        height: 44px;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+    }
+    
+    .tab-bar {
+        height: 65px;
+        z-index: 40;
+        box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .tab-item {
+        color: #999;
+        flex: 1;
+        text-align: center;
+        transition: color 0.3s ease;
+    }
+    
+    .tab-item.active {
+        color: #3B82F6;
+    }
+    
+    .tab-item:hover {
+        color: #3B82F6;
+    }
+    
+    body {
+        padding-bottom: 65px;
+    }
+</style> 

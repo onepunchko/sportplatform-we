@@ -1,0 +1,291 @@
+/* pages/ai-coach/ai-coach.wxss */
+@import "markdown.wxss";
+
+.ai-coach-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* 页面头部样式 */
+.header {
+  padding: 30rpx;
+  background-color: #3370FF;
+  color: white;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 6rpx;
+}
+
+.subtitle {
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+
+/* 聊天区域样式 */
+.chat-container {
+  flex: 1;
+  padding: 20rpx;
+  overflow-y: auto;
+}
+
+/* 欢迎消息样式 */
+.welcome-message {
+  background-color: rgba(51, 112, 255, 0.08);
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin: 20rpx 0;
+  text-align: center;
+}
+
+.welcome-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.welcome-text {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 消息样式 */
+.message {
+  display: flex;
+  margin-bottom: 30rpx;
+  align-items: flex-start;
+}
+
+.user-message {
+  flex-direction: row-reverse;
+}
+
+.ai-message {
+  flex-direction: row;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 10rpx;
+  flex-shrink: 0;
+}
+
+.ai-avatar image {
+  width: 100%;
+  height: 100%;
+  background-color: #3370FF;
+  border-radius: 50%;
+}
+
+.message-content {
+  max-width: 70%;
+  padding: 20rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.user-message .message-content {
+  background-color: #3370FF;
+  color: white;
+  border-top-right-radius: 4rpx;
+}
+
+.ai-message .message-content {
+  background-color: white;
+  color: #333;
+  border-top-left-radius: 4rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 训练计划卡片样式 */
+.training-plan {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  background-color: rgba(51, 112, 255, 0.05);
+  border-left: 8rpx solid #3370FF;
+  border-radius: 8rpx;
+}
+
+.plan-title {
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  font-size: 28rpx;
+}
+
+.plan-description {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+}
+
+.plan-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 16rpx;
+}
+
+.plan-tag {
+  font-size: 22rpx;
+  background-color: rgba(51, 112, 255, 0.1);
+  color: #3370FF;
+  padding: 6rpx 16rpx;
+  border-radius: 30rpx;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.save-plan-btn {
+  font-size: 24rpx;
+  background-color: #3370FF;
+  color: white;
+  border-radius: 40rpx;
+  padding: 6rpx 0;
+  width: 100%;
+  margin: 0;
+}
+
+/* 建议问题样式 */
+.suggestions {
+  margin-top: 16rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.suggestion-item {
+  font-size: 24rpx;
+  color: #3370FF;
+  background-color: rgba(51, 112, 255, 0.08);
+  padding: 10rpx 20rpx;
+  border-radius: 40rpx;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+  white-space: nowrap;
+}
+
+/* 输入正在输入动画 */
+.typing {
+  margin-bottom: 10rpx;
+}
+
+.typing-dots {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background: white;
+  border-radius: 16rpx;
+  width: 80rpx;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-right: 8rpx;
+  animation: pulse 1.2s infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+  margin-right: 0;
+}
+
+@keyframes pulse {
+  0%, 60%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  30% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* 底部输入区域样式 */
+.input-container {
+  background-color: white;
+  padding: 20rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.quick-questions {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.quick-questions::-webkit-scrollbar {
+  display: none;
+}
+
+.question-tag {
+  font-size: 24rpx;
+  color: #666;
+  background-color: #f0f2f5;
+  padding: 10rpx 20rpx;
+  border-radius: 40rpx;
+  white-space: nowrap;
+  margin-right: 16rpx;
+}
+
+.input-area {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 40rpx;
+  padding: 0 20rpx;
+}
+
+.message-input {
+  flex: 1;
+  height: 72rpx;
+  font-size: 28rpx;
+}
+
+.send-btn {
+  width: 100rpx;
+  height: 56rpx;
+  background-color: #3370FF;
+  color: white;
+  border-radius: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+/* 流式打字机效果 */
+@keyframes blinkCursor {
+  0%, 100% { border-right-color: transparent; }
+  50% { border-right-color: #3370FF; }
+}
+
+.ai-message .message-content {
+  background-color: white;
+  color: #333;
+  border-top-left-radius: 4rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.ai-message .message-content.typing-effect {
+  border-right: 2px solid #3370FF;
+  animation: blinkCursor 0.8s infinite;
+  white-space: pre-wrap;
+}

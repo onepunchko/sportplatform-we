@@ -1,0 +1,147 @@
+<!-- pages/venue-detail/venue-detail.wxml -->
+<view class="container">
+  <!-- 场馆图片 -->
+  <image class="venue-image" src="{{venue.image}}" mode="aspectFill"></image>
+  
+  <!-- 场馆信息 -->
+  <view class="venue-info">
+    <view class="venue-header">
+      <view class="venue-name">{{venue.name}}</view>
+      <view class="venue-status {{venue.open ? 'open' : 'closed'}}">
+        {{venue.open ? '开放中' : '已关闭'}}
+      </view>
+    </view>
+    
+    <view class="venue-address">
+      <image class="icon" src="/static/images/location.png" mode="aspectFit"></image>
+      <text>{{venue.address}}</text>
+    </view>
+    
+    <view class="venue-rating">
+      <image class="icon" src="/static/images/star.png" mode="aspectFit"></image>
+      <text class="rating-value">{{venue.rating}}</text>
+      <text class="rating-count">({{venue.reviews}}条评价)</text>
+    </view>
+    
+    <view class="venue-price">
+      <text class="price-value">¥{{venue.price}}/小时</text>
+    </view>
+  </view>
+  
+  <!-- 场馆介绍 -->
+  <view class="section">
+    <view class="section-title">场馆介绍</view>
+    <view class="section-content">
+      <text>{{venue.description}}</text>
+    </view>
+  </view>
+  
+  <!-- 场馆设施 -->
+  <view class="section">
+    <view class="section-title">场馆设施</view>
+    <view class="section-content facility-list">
+      <view class="facility-item" wx:for="{{venue.facilities}}" wx:key="index">
+        <text>{{item}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 场馆规则 -->
+  <view class="section">
+    <view class="section-title">场馆规则</view>
+    <view class="section-content">
+      <view class="rule-item" wx:for="{{venue.rules}}" wx:key="index">
+        <text>· {{item}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 可用时段 -->
+  <view class="section">
+    <view class="section-title">可用时段</view>
+    
+    <!-- 日期选择器 -->
+    <view class="date-selector-wrapper">
+      <view class="slider-indicator left"></view>
+      <scroll-view scroll-x="true" class="date-selector" enhanced="true" show-scrollbar="false">
+        <view class="date-item {{index === selectedDateIndex ? 'active' : ''}}" 
+              wx:for="{{dateList}}" 
+              wx:key="date" 
+              bindtap="selectDate" 
+              data-index="{{index}}">
+          <text class="date-day">{{item.day}}</text>
+          <text class="date-date">{{item.date}}</text>
+        </view>
+      </scroll-view>
+      <view class="slider-indicator right"></view>
+    </view>
+    
+    <!-- 时段分类 -->
+    <view class="timeslots">
+      <block wx:if="{{timeSlots.length > 0}}">
+        <!-- 上午时段 -->
+        <view class="timeslot-group" wx:if="{{morningSlots.length > 0}}">
+          <view class="timeslot-group-title">上午</view>
+          <view class="timeslot-group-items">
+            <view class="timeslot-item {{item.available ? '' : 'disabled'}} {{selectedTimeSlotId === item.id ? 'selected' : ''}}" 
+                  wx:for="{{morningSlots}}" 
+                  wx:key="id" 
+                  bindtap="selectTimeSlot" 
+                  data-id="{{item.id}}" 
+                  data-available="{{item.available}}">
+              <view class="timeslot-time">{{item.startTime}} - {{item.endTime}}</view>
+              <view class="timeslot-status">{{item.available ? '可预约' : '已约满'}}</view>
+              <view class="timeslot-price">¥{{item.price}}</view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 下午时段 -->
+        <view class="timeslot-group" wx:if="{{afternoonSlots.length > 0}}">
+          <view class="timeslot-group-title">下午</view>
+          <view class="timeslot-group-items">
+            <view class="timeslot-item {{item.available ? '' : 'disabled'}} {{selectedTimeSlotId === item.id ? 'selected' : ''}}" 
+                  wx:for="{{afternoonSlots}}" 
+                  wx:key="id" 
+                  bindtap="selectTimeSlot" 
+                  data-id="{{item.id}}" 
+                  data-available="{{item.available}}">
+              <view class="timeslot-time">{{item.startTime}} - {{item.endTime}}</view>
+              <view class="timeslot-status">{{item.available ? '可预约' : '已约满'}}</view>
+              <view class="timeslot-price">¥{{item.price}}</view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 晚上时段 -->
+        <view class="timeslot-group" wx:if="{{eveningSlots.length > 0}}">
+          <view class="timeslot-group-title">晚上</view>
+          <view class="timeslot-group-items">
+            <view class="timeslot-item {{item.available ? '' : 'disabled'}} {{selectedTimeSlotId === item.id ? 'selected' : ''}}" 
+                  wx:for="{{eveningSlots}}" 
+                  wx:key="id" 
+                  bindtap="selectTimeSlot" 
+                  data-id="{{item.id}}" 
+                  data-available="{{item.available}}">
+              <view class="timeslot-time">{{item.startTime}} - {{item.endTime}}</view>
+              <view class="timeslot-status">{{item.available ? '可预约' : '已约满'}}</view>
+              <view class="timeslot-price">¥{{item.price}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="empty-timeslots">
+          <text>当日暂无可用时段</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  
+  <!-- 预约按钮 -->
+  <view class="footer">
+    <button class="btn-reserve {{canReserve ? '' : 'disabled'}}" bindtap="reserve" disabled="{{!canReserve}}">
+      立即预约
+    </button>
+  </view>
+</view> 

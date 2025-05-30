@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园运动 - 运动社区</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .page-content {
+            padding: 15px;
+            padding-top: 60px;
+            padding-bottom: 70px;
+        }
+        
+        .post-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .post-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .user-avatar-sm {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .story-item {
+            width: 70px;
+            flex: 0 0 auto;
+        }
+        
+        .story-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+        
+        .story-avatar img {
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .categories-scroll {
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .categories-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .action-btn {
+            transition: all 0.2s;
+        }
+        
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .write-post-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #3B82F6;
+            color: white;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.2s;
+        }
+        
+        .write-post-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 5px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- 引入顶部状态栏 -->
+    <div id="status-bar"></div>
+    
+    <!-- 页面内容 -->
+    <div class="page-content">
+        <!-- 页面标题 -->
+        <div class="flex justify-between items-center mb-5">
+            <h1 class="text-2xl font-bold">运动社区</h1>
+            <div class="flex space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                    <i class="fas fa-search text-gray-500"></i>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                    <i class="fas fa-bell text-gray-500"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 好友动态 -->
+        <div class="mb-5 categories-scroll">
+            <div class="flex space-x-4 pb-2">
+                <div class="story-item flex flex-col items-center">
+                    <div class="story-avatar mb-1">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="用户头像">
+                    </div>
+                    <p class="text-xs truncate w-full text-center">李明</p>
+                </div>
+                
+                <div class="story-item flex flex-col items-center">
+                    <div class="story-avatar mb-1">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="用户头像">
+                    </div>
+                    <p class="text-xs truncate w-full text-center">张婷</p>
+                </div>
+                
+                <div class="story-item flex flex-col items-center">
+                    <div class="story-avatar mb-1">
+                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="用户头像">
+                    </div>
+                    <p class="text-xs truncate w-full text-center">王浩</p>
+                </div>
+                
+                <div class="story-item flex flex-col items-center">
+                    <div class="story-avatar mb-1">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="用户头像">
+                    </div>
+                    <p class="text-xs truncate w-full text-center">刘芳</p>
+                </div>
+                
+                <div class="story-item flex flex-col items-center">
+                    <div class="story-avatar mb-1">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="用户头像">
+                    </div>
+                    <p class="text-xs truncate w-full text-center">赵强</p>
+                </div>
+                
+                <div class="story-item flex flex-col items-center">
+                    <div class="story-avatar mb-1">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="用户头像">
+                    </div>
+                    <p class="text-xs truncate w-full text-center">陈静</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 分类标签 -->
+        <div class="flex space-x-3 mb-5 overflow-x-auto pb-2 categories-scroll">
+            <button class="px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-medium">推荐</button>
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">跑步</button>
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">健身</button>
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">篮球</button>
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">羽毛球</button>
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">足球</button>
+        </div>
+        
+        <!-- 动态列表 -->
+        <div class="space-y-5 mb-10">
+            <!-- 动态1 -->
+            <div class="post-card bg-white">
+                <div class="p-4">
+                    <div class="flex items-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="用户头像" class="user-avatar mr-3">
+                        <div>
+                            <h3 class="font-semibold">李明</h3>
+                            <p class="text-xs text-gray-500">体育学院 · 15分钟前</p>
+                        </div>
+                    </div>
+                    <p class="text-sm mb-3">今天完成了一次艰难的10公里跑步训练，感觉自己的耐力提升了不少。大家有什么提高长跑效率的技巧吗？</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1554126807-bb9155717f44?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=70" alt="跑步照片" class="post-img">
+                <div class="p-4">
+                    <div class="flex justify-between text-gray-500 text-sm mb-2">
+                        <div><i class="fas fa-heart text-red-500 mr-1"></i> <span class="likes-count">0</span>人点赞</div>
+                        <div><i class="far fa-comment mr-1"></i> 8条评论</div>
+                    </div>
+                    <div class="flex border-t border-gray-100 pt-3">
+                        <button id="likeBtn" class="flex-1 text-center py-2 action-btn"><i id="likeIcon" class="far fa-heart mr-1"></i> 点赞</button>
+                        <button class="flex-1 text-center py-2 action-btn"><i class="far fa-comment mr-1"></i> 评论</button>
+                        <button class="flex-1 text-center py-2 action-btn"><i class="far fa-share-square mr-1"></i> 分享</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 动态2 -->
+            <div class="post-card bg-white">
+                <div class="p-4">
+                    <div class="flex items-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="用户头像" class="user-avatar mr-3">
+                        <div>
+                            <h3 class="font-semibold">张婷</h3>
+                            <p class="text-xs text-gray-500">计算机学院 · 2小时前</p>
+                        </div>
+                    </div>
+                    <p class="text-sm mb-3">约球的小伙伴看过来，今晚7点羽毛球馆见！欢迎各位小白和高手一起来打羽毛球，交流技巧～</p>
+                    <div class="bg-blue-50 rounded-lg p-3 mb-3">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-check text-blue-500 mr-2"></i>
+                            <div>
+                                <p class="font-medium text-sm">羽毛球小组活动</p>
+                                <p class="text-xs text-gray-500">今天 19:00-21:00 · 中心羽毛球馆</p>
+                            </div>
+                        </div>
+                        <button class="mt-2 px-4 py-1 bg-blue-500 text-white text-xs rounded-full">我想参加</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between text-gray-500 text-sm mb-2">
+                        <div><i class="fas fa-heart text-red-500 mr-1"></i> 15人点赞</div>
+                        <div><i class="far fa-comment mr-1"></i> 6条评论</div>
+                    </div>
+                    <div class="flex border-t border-gray-100 pt-3">
+                        <button class="flex-1 text-center py-2 action-btn"><i class="far fa-heart mr-1"></i> 点赞</button>
+                        <button class="flex-1 text-center py-2 action-btn"><i class="far fa-comment mr-1"></i> 评论</button>
+                        <button class="flex-1 text-center py-2 action-btn"><i class="far fa-share-square mr-1"></i> 分享</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 动态3 -->
+            <div class="post-card bg-white">
+                <div class="p-4">
+                    <div class="flex items-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="用户头像" class="user-avatar mr-3">
+                        <div>
+                            <h3 class="font-semibold">王浩</h3>
+                            <p class="text-xs text-gray-500">经济学院 · 昨天</p>
+                        </div>
+                    </div>
+                    <p class="text-sm mb-3">分享一组健身增肌训练计划，坚持一个月已经有明显效果了！欢迎来私信交流～</p>
+                </div>
+                <div class="grid grid-cols-2 gap-1">
+                    <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=70" alt="健身照片" class="h-32 w-full object-cover">
+                    <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=70" alt="健身照片" class="h-32 w-full object-cover">
+                    <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=70" alt="健身照片" class="h-32 w-full object-cover">
+                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=70" alt="健身照片" class="h-32 w-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between text-gray-500 text-sm mb-2">
+                        <div><i class="fas fa-heart text-red-500 mr-1"></i> 42人点赞</div>
+                        <div><i class="far fa-comment mr-1"></i> 12条评论</div>
+                    </div>
+                    <div class="flex border-t border-gray-100 pt-3">
+                        <button class="flex-1 text-center py-2 action-btn"><i class="far fa-heart mr-1"></i> 点赞</button>
+                        <button class="flex-1 text-center py-2 action-btn"><i class="far fa-comment mr-1"></i> 评论</button>
+                        <button class="flex-1 text-center py-2 action-btn"><i class="far fa-share-square mr-1"></i> 分享</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 发布动态按钮 -->
+        <button class="write-post-btn">
+            <i class="fas fa-plus text-xl"></i>
+        </button>
+    </div>
+    
+    <!-- 引入底部导航栏 -->
+    <div id="tab-bar"></div>
+    
+    <script>
+        // 页面初始化时立即执行，不等待DOMContentLoaded事件
+        (function() {
+            // 立即加载李明动态的实际点赞数
+            const fetchLikesCount = async () => {
+                try {
+                    // 检查登录状态
+                    const token = localStorage.getItem('token');
+                    const userId = localStorage.getItem('userId') || 1; // 默认用户ID为1
+                    
+                    const response = await fetch('/api/community/post/detail', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token ? 'Bearer ' + token : ''
+                        },
+                        body: JSON.stringify({
+                            post_id: 1, // 李明动态的ID
+                            user_id: userId // 传递用户ID查询是否已点赞
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data && data.body && data.body.post) {
+                        const likesCount = data.body.post.likes_count || data.body.post.likes || 0;
+                        console.log('已获取数据库中的实际点赞数:', likesCount);
+                        
+                        // 确保DOM已加载，然后设置点赞数
+                        const setLikesCount = () => {
+                            const likesElement = document.querySelector('.likes-count');
+                            if (likesElement) {
+                                likesElement.textContent = likesCount;
+                            } else {
+                                // 如果DOM元素还没准备好，等待一段时间再尝试
+                                setTimeout(setLikesCount, 50);
+                            }
+                        };
+                        
+                        // 立即尝试设置点赞数
+                        setLikesCount();
+                    }
+                } catch (error) {
+                    console.error('获取点赞数失败:', error);
+                }
+            };
+            
+            // 立即执行获取点赞数
+            fetchLikesCount();
+        })();
+        
+        // 加载共用组件
+        fetch('../components/common.html')
+            .then(response => response.text())
+            .then(data => {
+                // 插入顶部状态栏和底部导航栏
+                const parser = new DOMParser();
+                const htmlDoc = parser.parseFromString(data, 'text/html');
+                
+                // 获取状态栏
+                const statusBar = htmlDoc.querySelector('.ios-status-bar');
+                document.getElementById('status-bar').appendChild(statusBar);
+                
+                // 获取底部导航栏
+                const tabBar = htmlDoc.querySelector('.tab-bar');
+                document.getElementById('tab-bar').appendChild(tabBar);
+                
+                // 设置运动社区页导航为激活状态
+                const communityTab = document.querySelector('.tab-item[href="community.html"]');
+                if (communityTab) {
+                    communityTab.classList.add('active');
+                }
+            });
+            
+        // 页面加载时获取李明动态实际点赞数和用户状态
+        document.addEventListener('DOMContentLoaded', function() {
+            // 点赞相关变量
+            let isLiked = false;
+            let currentUserId = null;
+            const likeBtn = document.getElementById('likeBtn');
+            const likeIcon = document.getElementById('likeIcon');
+            const likesCountElement = document.querySelector('.likes-count');
+            
+            // 检查登录状态
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('userId') || 1; // 默认用户ID为1（使用模拟用户）
+            currentUserId = userId;
+            
+            // 获取登录用户是否已点赞的状态
+            fetch('/api/community/post/detail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token ? 'Bearer ' + token : ''
+                },
+                body: JSON.stringify({
+                    post_id: 1, // 李明动态的ID
+                    user_id: userId // 传递用户ID查询是否已点赞
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.body && data.body.post) {
+                        // 更新点赞状态
+                        if (data.body.post.isLiked !== undefined) {
+                            isLiked = data.body.post.isLiked;
+                            // 更新图标样式
+                            likeIcon.className = isLiked ? 'fas fa-heart mr-1 text-red-500' : 'far fa-heart mr-1';
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('获取点赞状态失败:', error);
+                    isLiked = false;
+                });
+                
+            // 点赞按钮点击事件
+            likeBtn.addEventListener('click', function() {
+                // 检查是否登录
+                if (!token) {
+                    // 未登录时提示登录
+                    alert('请先登录后再进行点赞操作');
+                    // 可以跳转到登录页
+                    // window.location.href = '/login.html';
+                    return;
+                }
+                
+                // 先更新UI，提高响应速度
+                let likesCount = parseInt(likesCountElement.textContent);
+                const newLikes = isLiked ? likesCount - 1 : likesCount + 1;
+                
+                // 临时更新UI
+                likesCountElement.textContent = newLikes;
+                likeIcon.className = isLiked ? 'far fa-heart mr-1' : 'fas fa-heart mr-1 text-red-500';
+                
+                // 发送点赞请求到服务器
+                fetch('/api/community/like/toggle', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({
+                        post_id: 1 // 李明动态的ID
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('点赞操作成功', data);
+                    
+                    // 使用服务器返回的数据更新UI
+                    if (data && data.body) {
+                        // 更新点赞数
+                        if (data.body.likes_count !== undefined) {
+                            likesCountElement.textContent = data.body.likes_count;
+                        } else if (data.body.likes !== undefined) {
+                            likesCountElement.textContent = data.body.likes;
+                        }
+                        
+                        // 更新点赞状态
+                        if (data.body.is_liked !== undefined) {
+                            isLiked = data.body.is_liked;
+                            likeIcon.className = isLiked ? 'fas fa-heart mr-1 text-red-500' : 'far fa-heart mr-1';
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('点赞操作失败:', error);
+                    // 操作失败时恢复UI到点击前状态
+                    likesCountElement.textContent = likesCount;
+                    likeIcon.className = isLiked ? 'fas fa-heart mr-1 text-red-500' : 'far fa-heart mr-1';
+                });
+                
+                // 只在UI层面临时切换点赞状态，等待服务器响应更新实际状态
+                isLiked = !isLiked;
+            });
+        });
+    </script>
+</body>
+</html> 

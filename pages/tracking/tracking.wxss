@@ -1,0 +1,367 @@
+/* pages/tracking/tracking.wxss */
+.container {
+  padding: 30rpx;
+}
+
+.goal-section {
+  margin-bottom: 30rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.05);
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.edit-btn {
+  font-size: 28rpx;
+  color: #3370FF;
+}
+
+.goal-progress {
+  display: flex;
+  justify-content: center;
+  margin: 20rpx 0 30rpx;
+}
+
+.progress-circle {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background: conic-gradient(#3370FF 0% 65%, #E3F0FF 65% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.progress-circle::after {
+  content: '';
+  position: absolute;
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.progress-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.percent {
+  font-size: 36rpx;
+  font-weight: bold;
+  display: block;
+}
+
+.label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.goal-items {
+  margin-top: 20rpx;
+}
+
+.goal-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  position: relative;
+}
+
+.goal-icon {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 12rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.goal-icon.blue {
+  background-color: #e3f0ff;
+}
+
+.goal-icon.green {
+  background-color: #e7f9f0;
+}
+
+.goal-icon.purple {
+  background-color: #f0e7ff;
+}
+
+.goal-icon.orange {
+  background-color: #fff4e5;
+}
+
+.goal-icon image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.goal-info {
+  flex: 1;
+}
+
+.goal-label {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.goal-value {
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+}
+
+.completed {
+  font-weight: bold;
+}
+
+.separator {
+  margin: 0 8rpx;
+  color: #999;
+}
+
+.target {
+  color: #999;
+}
+
+.goal-progress-bar {
+  position: absolute;
+  left: 0;
+  bottom: -10rpx;
+  width: 100%;
+  height: 6rpx;
+  background-color: #f0f0f0;
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+
+.progress-inner {
+  height: 100%;
+  background-color: #3370FF;
+  border-radius: 3rpx;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  font-size: 28rpx;
+  color: #999;
+  margin-left: 20rpx;
+  padding-bottom: 6rpx;
+}
+
+.tab.active {
+  color: #333;
+  font-weight: bold;
+  border-bottom: 4rpx solid #3370FF;
+}
+
+.chart-container {
+  display: flex;
+  height: 300rpx;
+  margin-bottom: 20rpx;
+}
+
+.chart-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 20rpx;
+  padding-bottom: 30rpx;
+}
+
+.chart-y-axis text {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.chart-bars {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.chart-bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-bar {
+  width: 20rpx;
+  height: 250rpx;
+  background-color: #f0f0f0;
+  border-radius: 10rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.chart-bar-inner {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #3370FF;
+  border-radius: 10rpx;
+}
+
+.chart-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+.stats-summary {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.summary-item {
+  text-align: center;
+}
+
+.summary-label {
+  font-size: 26rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 6rpx;
+}
+
+.summary-value {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.recent-section {
+  margin-bottom: 30rpx;
+}
+
+.recent-list {
+  margin-top: 20rpx;
+}
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.recent-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background-color: #e3f0ff;
+  border-radius: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.recent-icon image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.recent-info {
+  flex: 1;
+}
+
+.recent-title {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.recent-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.recent-stats {
+  display: flex;
+}
+
+.recent-stat {
+  margin-left: 30rpx;
+  text-align: right;
+}
+
+.stat-value {
+  font-size: 26rpx;
+  font-weight: bold;
+  display: block;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #999;
+}
+
+/* 开始记录按钮样式 */
+.start-tracking-btn {
+  position: fixed;
+  bottom: 30rpx;
+  right: 30rpx;
+  background-color: #3399ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  flex-direction: column;
+  font-size: 30rpx;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.start-tracking-btn:active {
+  transform: scale(0.95);
+  background-color: #2288ee;
+}
+
+.tracking-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom: 10rpx;
+} 

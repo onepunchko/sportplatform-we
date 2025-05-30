@@ -1,0 +1,94 @@
+<!-- pages/community/community.wxml -->
+<view class="container">
+  <view class="user-scroll">
+    <scroll-view scroll-x class="user-list">
+      <view class="user-item" wx:for="{{recommendUsers}}" wx:key="id" bindtap="goToUserDetail" data-id="{{item.id}}">
+        <view class="user-avatar">
+          <image src="{{item.avatar}}"></image>
+        </view>
+        <text class="user-name">{{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="category-scroll">
+    <scroll-view scroll-x class="category-list">
+      <view class="category-item {{item.id === activeCategory ? 'active' : ''}}" 
+            wx:for="{{categories}}" 
+            wx:key="id" 
+            bindtap="switchCategory" 
+            data-id="{{item.id}}">
+        <text>{{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="post-list">
+    <view class="post-item card" wx:for="{{posts}}" wx:key="id">
+      <view class="post-header" bindtap="goToUserDetail" data-id="{{item.user.id}}">
+        <view class="post-avatar">
+          <image src="{{item.user.avatar}}"></image>
+        </view>
+        <view class="post-user-info">
+          <text class="post-username">{{item.user.name}}</text>
+          <text class="post-time">{{item.time}}</text>
+        </view>
+      </view>
+      <view class="post-content">
+        <text>{{item.content}}</text>
+        <view class="post-category-labels">
+          <text wx:for="{{item.categories}}" wx:key="index" class="category-label">#{{item.categories[index]}}</text>
+        </view>
+        <view class="post-images" wx:if="{{item.images && item.images.length > 0}}">
+          <image wx:for="{{item.images}}" wx:for-item="image" wx:key="index" src="{{image}}" mode="aspectFill"></image>
+        </view>
+      </view>
+      <view class="post-actions">
+        <view class="action-item" bindtap="likePost" data-id="{{item.id}}">
+          <image src="{{item.isLiked ? '/static/images/like_filled.png' : '/static/images/like.png'}}"></image>
+          <text>{{item.likes}}</text>
+        </view>
+        <view class="action-item" bindtap="toggleCommentInput" data-id="{{item.id}}">
+          <image src="/static/images/comment.png"></image>
+          <text>{{item.comments}}</text>
+        </view>
+        <view class="action-item">
+          <image src="/static/images/share.png"></image>
+          <text>分享</text>
+        </view>
+      </view>
+      <view class="comment-list" wx:if="{{item.showComments}}">
+        <view class="comment-item" wx:for="{{item.commentList}}" wx:for-item="comment" wx:key="id">
+          <text class="comment-user">{{comment.user.name}}：</text>
+          <text class="comment-content">{{comment.content}}</text>
+        </view>
+        <view class="comment-input-wrapper">
+          <input class="comment-input" placeholder="写评论..." value="{{item.commentInput}}" bindinput="inputCommentContent" data-id="{{item.id}}" />
+          <button class="comment-submit" bindtap="submitComment" data-id="{{item.id}}">发送</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="post-input-container">
+    <view class="post-input-wrapper">
+      <input class="post-input" 
+             placeholder="分享你的运动心得..." 
+             value="{{postContent}}" 
+             bindinput="inputPostContent" />
+      <view class="post-input-actions">
+        <view class="input-action" bindtap="toggleEmojiPicker">
+          <image src="/static/images/emoji.png"></image>
+        </view>
+        <view class="input-action" bindtap="chooseImage">
+          <image src="/static/images/image.png"></image>
+        </view>
+      </view>
+    </view>
+    <button class="post-button" bindtap="submitPost">发布</button>
+  </view>
+
+  <view class="add-post-button" bindtap="goToCreatePost">
+    <image src="/static/images/add.png"></image>
+  </view>
+</view> 

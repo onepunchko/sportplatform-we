@@ -1,0 +1,312 @@
+/* pages/index/index.wxss */
+.container {
+  padding: 30rpx;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.user-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name text {
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.school-info {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.search {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.search .icon {
+  width: 100%;
+  height: 100%;
+}
+
+.today-sports {
+  margin-bottom: 30rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.view-all {
+  font-size: 26rpx;
+  color: #3370FF;
+  display: flex;
+  align-items: center;
+  background-color: #f1f5ff;
+  padding: 6rpx 16rpx;
+  border-radius: 30rpx;
+}
+
+.view-all .arrow {
+  font-size: 24rpx;
+  margin-left: 4rpx;
+}
+
+.today-stats-tags {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.stats-tag {
+  width: 23%;
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx 0;
+  text-align: center;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.05);
+}
+
+.tag-icon {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10rpx;
+}
+
+.tag-icon.blue {
+  background-color: #e3f0ff;
+}
+
+.tag-icon.green {
+  background-color: #e7f9f0;
+}
+
+.tag-icon.purple {
+  background-color: #f0e7ff;
+}
+
+.tag-icon.orange {
+  background-color: #fff4e5;
+}
+
+.tag-icon image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.tag-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.tag-title {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 6rpx;
+}
+
+.tag-value {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.more {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.activity-item {
+  position: relative;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.activity-image {
+  width: 100%;
+  height: 300rpx;
+  border-radius: 12rpx;
+}
+
+.activity-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  color: #fff;
+}
+
+.activity-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 6rpx;
+  display: block;
+}
+
+.activity-time {
+  font-size: 24rpx;
+}
+
+/* 新增功能入口样式 */
+.feature-entries {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.feature-entry {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rpx 0;
+}
+
+.entry-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #f0f7ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.entry-icon image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.entry-text {
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-bottom: 4rpx;
+}
+
+.entry-desc {
+  font-size: 20rpx;
+  color: #999;
+  text-align: center;
+  width: 120rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 快捷入口网格样式 */
+.quick-entry-grid {
+  margin-top: 20rpx;
+}
+
+.quick-entry-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.quick-entry-item {
+  width: 48%;
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.05);
+}
+
+.quick-entry-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 16rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.quick-entry-icon.blue {
+  background-color: #e3f0ff;
+}
+
+.quick-entry-icon.red {
+  background-color: #ffe3e3;
+}
+
+.quick-entry-icon.purple {
+  background-color: #f0e7ff;
+}
+
+.quick-entry-icon.orange {
+  background-color: #fff4e5;
+}
+
+.quick-entry-icon image {
+  width: 46rpx;
+  height: 46rpx;
+}
+
+.quick-entry-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.quick-entry-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+}
+
+.quick-entry-desc {
+  font-size: 24rpx;
+  color: #999;
+} 

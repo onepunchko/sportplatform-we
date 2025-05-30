@@ -1,0 +1,47 @@
+<view class="login-container">
+  <!-- 顶部图片 -->
+  <view class="login-header">
+    <image class="logo" src="/static/images/logo.png" mode="aspectFit"></image>
+    <view class="title">校园体育活动平台</view>
+    <view class="subtitle">授权登录，体验更多功能</view>
+  </view>
+  
+  <!-- 授权区域 -->
+  <view class="auth-area">
+    <!-- 微信授权按钮 -->
+    <view class="auth-item" wx:if="{{!hasUserInfo}}">
+      <view class="auth-title">微信授权</view>
+      <view class="auth-desc">授权后可使用微信账号登录</view>
+      <button class="auth-btn wx-btn" bindtap="handleWxLogin">微信快捷登录</button>
+    </view>
+    
+    <!-- 手机号授权按钮 -->
+    <view class="auth-item" wx:if="{{hasUserInfo && !hasPhoneNumber}}">
+      <view class="auth-title">绑定手机号</view>
+      <view class="auth-desc">授权后可接收活动提醒</view>
+      <button class="auth-btn phone-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">一键获取手机号</button>
+    </view>
+    
+    <!-- 已登录状态 -->
+    <view class="auth-success" wx:if="{{hasUserInfo && hasPhoneNumber}}">
+      <icon type="success" size="64"></icon>
+      <view class="success-text">授权成功，正在进入...</view>
+    </view>
+  </view>
+  
+  <!-- 底部隐私声明 -->
+  <view class="privacy-policy">
+    <view>登录即代表您同意</view>
+    <view class="policy-links" bindtap="showPrivacyPolicy">《用户协议和隐私条款》</view>
+  </view>
+  
+  <!-- 拒绝授权时的引导 -->
+  <view class="reject-guide" wx:if="{{showRejectGuide}}">
+    <view class="guide-title">提示</view>
+    <view class="guide-content">为了更好的使用体验，请允许授权登录</view>
+    <view class="guide-btns">
+      <button class="cancel-btn" bindtap="cancelAuth">取消</button>
+      <button class="confirm-btn" bindtap="goToBindPhone">手动绑定手机号</button>
+    </view>
+  </view>
+</view>

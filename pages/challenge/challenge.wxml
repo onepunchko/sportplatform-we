@@ -1,0 +1,122 @@
+<!-- pages/challenge/challenge.wxml -->
+<view class="container">
+  <scroll-view scroll-x enable-flex class="tabs-scroll">
+    <view class="tabs">
+      <view class="tab {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">
+        我的挑战
+      </view>
+      <view class="tab {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">
+        发现挑战
+      </view>
+      <view class="tab {{activeTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">
+        热门排行
+      </view>
+      <view class="tab {{activeTab === 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">
+        挑战攻略
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 我的挑战 -->
+  <view class="tab-content" wx:if="{{activeTab === 0}}">
+    <block wx:if="{{myChallenges.length > 0}}">
+      <view class="challenge-list">
+        <block wx:for="{{myChallenges}}" wx:key="id">
+          <view class="challenge-item card" bindtap="viewChallengeDetail" data-id="{{item.id}}">
+            <image class="challenge-image" src="{{item.image}}" mode="aspectFill"></image>
+            <view class="challenge-info">
+              <view class="challenge-title">{{item.title}}</view>
+              <view class="challenge-desc">{{item.description}}</view>
+              <view class="challenge-progress">
+                <view class="progress-bar">
+                  <view class="progress-inner" style="width: {{item.progress}}%;"></view>
+                </view>
+                <view class="progress-text">
+                  <text>{{item.completed}}/{{item.total}}</text>
+                  <text>{{item.progress}}%</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="empty-state">
+        <image class="empty-icon" src="/static/images/empty_challenge.png"></image>
+        <view class="empty-text">暂无挑战，去发现更多挑战吧</view>
+        <button class="btn-primary" bindtap="switchTab" data-index="1">发现挑战</button>
+      </view>
+    </block>
+  </view>
+
+  <!-- 发现挑战 -->
+  <view class="tab-content" wx:if="{{activeTab === 1}}">
+    <view class="category-scroll">
+      <scroll-view scroll-x class="categories">
+        <view class="category-list">
+          <block wx:for="{{categories}}" wx:key="id">
+            <view class="category-item {{item.active || item.id === 'all' ? 'active' : ''}}" 
+                  bindtap="filterChallenges" 
+                  data-id="{{item.id}}">
+              {{item.name}}
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="challenge-list">
+      <block wx:for="{{hotChallenges}}" wx:key="id">
+        <view class="hot-challenge-item card">
+          <image class="challenge-image" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="challenge-content">
+            <view class="challenge-header">
+              <view class="challenge-title">{{item.title}}</view>
+              <view class="challenge-difficulty">
+                <block wx:for="{{[1,2,3,4,5].slice(0, item.difficulty)}}" wx:key="*this" wx:for-item="star">
+                  <image src="/static/images/star.png" class="star-icon"></image>
+                </block>
+              </view>
+            </view>
+            <view class="challenge-desc">{{item.description}}</view>
+            <view class="challenge-meta">
+              <view class="meta-item">
+                <image src="/static/images/people.png" class="meta-icon"></image>
+                <text>{{item.participants}}人参与</text>
+              </view>
+              <view class="meta-item">
+                <image src="/static/images/time.png" class="meta-icon"></image>
+                <text>截止: {{item.deadline}}</text>
+              </view>
+            </view>
+            <view class="challenge-actions">
+              <button class="btn-join" bindtap="joinChallenge" data-id="{{item.id}}">参加</button>
+              <button class="btn-detail" bindtap="viewChallengeDetail" data-id="{{item.id}}">详情</button>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  
+  <!-- 热门排行 -->
+  <view class="tab-content" wx:if="{{activeTab === 2}}">
+    <view class="empty-state">
+      <image class="empty-icon" src="/static/images/empty_challenge.png"></image>
+      <view class="empty-text">热门排行功能开发中</view>
+    </view>
+  </view>
+  
+  <!-- 挑战攻略 -->
+  <view class="tab-content" wx:if="{{activeTab === 3}}">
+    <view class="empty-state">
+      <image class="empty-icon" src="/static/images/empty_challenge.png"></image>
+      <view class="empty-text">挑战攻略功能开发中</view>
+    </view>
+  </view>
+
+  <view class="create-challenge" bindtap="createChallenge">
+    <image src="/static/images/add.png"></image>
+  </view>
+</view> 

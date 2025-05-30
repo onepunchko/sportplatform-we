@@ -1,0 +1,119 @@
+<!-- pages/profile/profile.wxml -->
+<view class="container">
+  <view class="profile-header">
+    <view class="user-info">
+      <view class="avatar-container">
+        <image class="user-avatar" src="{{userInfo.avatar}}"></image>
+      </view>
+      <view class="user-details">
+        <view class="user-name">{{userInfo.name}}
+          <view class="edit-icon" bindtap="editUserInfo">
+            <image src="/static/images/edit.png"></image>
+          </view>
+        </view>
+        <view class="user-school">{{userInfo.schoolName}}</view>
+        <view class="user-stats">
+          <view class="stat-item">
+            <text class="stat-value">{{userInfo.days}}</text>
+            <text class="stat-label">天数</text>
+          </view>
+          <view class="stat-separator"></view>
+          <view class="stat-item">
+            <text class="stat-value">{{userInfo.level}}</text>
+            <text class="stat-label">等级</text>
+          </view>
+          <view class="stat-separator"></view>
+          <view class="stat-item">
+            <text class="stat-value">{{userInfo.points}}</text>
+            <text class="stat-label">积分</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">运动数据统计</text>
+    </view>
+    <view class="activity-data-card">
+      <view class="activity-grid">
+        <view class="activity-item">
+          <view class="activity-value">{{activityData.steps}}</view>
+          <view class="activity-label">总步数</view>
+        </view>
+        <view class="activity-item">
+          <view class="activity-value">{{activityData.distance}}<text class="unit">公里</text></view>
+          <view class="activity-label">总里程</view>
+        </view>
+        <view class="activity-item">
+          <view class="activity-value">{{activityData.calories}}<text class="unit">千卡</text></view>
+          <view class="activity-label">总消耗</view>
+        </view>
+        <view class="activity-item">
+          <view class="activity-value">{{activityData.time}}<text class="unit">分钟</text></view>
+          <view class="activity-label">总时长</view>
+        </view>
+      </view>
+      <view class="view-more" bindtap="goToMyActivity">查看详情</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">成就与徽章</text>
+      <text class="section-more" bindtap="goToAchievements">更多</text>
+    </view>
+    <view class="achievements-card">
+      <view class="achievements-list">
+        <block wx:for="{{achievements}}" wx:key="id">
+          <view class="achievement-item">
+            <image class="achievement-icon" src="{{item.icon}}"></image>
+            <text class="achievement-name">{{item.name}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="menu-card">
+      <view class="menu-item" bindtap="goToMyActivity">
+        <view class="menu-icon">
+          <image src="/static/images/activity.png"></image>
+        </view>
+        <view class="menu-title">我的运动</view>
+        <view class="menu-arrow">
+          <image src="/static/images/arrow.png"></image>
+        </view>
+      </view>
+      <view class="menu-item" bindtap="goToAchievements">
+        <view class="menu-icon">
+          <image src="/static/images/trophy.png"></image>
+        </view>
+        <view class="menu-title">成就徽章</view>
+        <view class="menu-arrow">
+          <image src="/static/images/arrow.png"></image>
+        </view>
+      </view>
+      <view class="menu-item">
+        <view class="menu-icon">
+          <image src="/static/images/help.png"></image>
+        </view>
+        <view class="menu-title">帮助中心</view>
+        <view class="menu-arrow">
+          <image src="/static/images/arrow.png"></image>
+        </view>
+      </view>
+      <view class="menu-item" bindtap="goToSettings">
+        <view class="menu-icon">
+          <image src="/static/images/settings.png"></image>
+        </view>
+        <view class="menu-title">设置</view>
+        <view class="menu-arrow">
+          <image src="/static/images/arrow.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

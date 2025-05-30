@@ -1,0 +1,113 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="user-info">
+      <view class="avatar">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="user-name">
+        <text>你好，大学生</text>
+        <view class="school-info">大学生运动健康行动计划</view>
+      </view>
+    </view>
+    <view class="search">
+      <image class="icon" src="https://img.icons8.com/ios/50/000000/search--v1.png"></image>
+    </view>
+  </view>
+
+  <view class="today-sports">
+    <view class="section-header">
+      <text class="title">今日运动</text>
+      <view class="view-all" bindtap="goToTracking">查看详情 <text class="arrow">></text></view>
+    </view>
+    <view class="today-stats-tags">
+      <view class="stats-tag">
+        <view class="tag-icon blue">
+          <image src="/static/images/tabbar/walk.png"></image>
+        </view>
+        <view class="tag-info">
+          <text class="tag-title">步数</text>
+          <text class="tag-value">{{sportData.steps}}</text>
+        </view>
+      </view>
+
+      <view class="stats-tag">
+        <view class="tag-icon green">
+          <image src="/static/images/tabbar/distance.png"></image>
+        </view>
+        <view class="tag-info">
+          <text class="tag-title">距离</text>
+          <text class="tag-value">{{sportData.distance}}千米</text>
+        </view>
+      </view>
+
+      <view class="stats-tag">
+        <view class="tag-icon purple">
+          <image src="/static/images/tabbar/calories.png"></image>
+        </view>
+        <view class="tag-info">
+          <text class="tag-title">卡路里</text>
+          <text class="tag-value">{{sportData.calories}}千卡</text>
+        </view>
+      </view>
+
+      <view class="stats-tag">
+        <view class="tag-icon orange">
+          <image src="/static/images/tabbar/time.png"></image>
+        </view>
+        <view class="tag-info">
+          <text class="tag-title">时长</text>
+          <text class="tag-value">{{sportData.duration}}分钟</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="hot-activities card">
+    <view class="card-header">
+      <text class="title">校园热门活动</text>
+      <text class="more" bindtap="goToActivityDetail">更多</text>
+    </view>
+    <view class="activity-item" bindtap="goToActivityDetail" data-id="{{hotActivities[0].id}}">
+      <image class="activity-image" src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60%27"></image>
+      <view class="activity-info">
+        <text class="activity-title">{{hotActivities[0].title}}</text>
+        <text class="activity-time">{{hotActivities[0].time}}</text>
+      </view>
+    </view>
+    
+    <view class="feature-entries">
+      <view class="feature-entry" bindtap="goToReservation">
+        <view class="entry-icon">
+          <image src="https://img.icons8.com/ios/50/000000/calendar--v1.png"></image>
+        </view>
+        <text class="entry-text">场地预约</text>
+        <text class="entry-desc">便捷预约校园场馆</text>
+      </view>
+      
+      <view class="feature-entry" bindtap="goToAiCoach">
+        <view class="entry-icon">
+          <image src="https://img.icons8.com/ios/50/000000/robot--v1.png"></image>
+        </view>
+        <text class="entry-text">AI教练</text>
+        <text class="entry-desc">个性化运动指导</text>
+      </view>
+      
+      <view class="feature-entry" bindtap="goToChallenge">
+        <view class="entry-icon">
+          <image src="https://img.icons8.com/ios/50/000000/trophy--v1.png"></image>
+        </view>
+        <text class="entry-text">运动挑战</text>
+        <text class="entry-desc">参与校园运动活动</text>
+      </view>
+      
+      <view class="feature-entry" bindtap="goToNews">
+        <view class="entry-icon">
+          <image src="https://img.icons8.com/ios/50/000000/news--v1.png"></image>
+        </view>
+        <text class="entry-text">运动资讯</text>
+        <text class="entry-desc">了解最新运动资讯</text>
+      </view>
+    </view>
+  </view>
+</view> 

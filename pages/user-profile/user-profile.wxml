@@ -1,0 +1,30 @@
+<view class="profile-container">
+  <view class="profile-header">
+    <view class="header-title">完善个人信息</view>
+    <view class="header-desc">设置个性昵称和头像，开始你的运动之旅</view>
+  </view>
+  
+  <view class="profile-form">
+    <!-- 头像上传 -->
+    <view class="avatar-section">
+      <view class="section-title">头像</view>
+      <view class="avatar-uploader" bindtap="chooseAvatar">
+        <image class="avatar-image" src="{{avatarUrl || '/static/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <view class="avatar-tips">点击更换头像</view>
+      </view>
+    </view>
+    
+    <!-- 昵称设置 -->
+    <view class="nickname-section">
+      <view class="section-title">昵称</view>
+      <view class="nickname-input-wrap">
+        <input class="nickname-input" value="{{nickname}}" placeholder="请输入昵称（2-12个字符）" bindinput="onNicknameInput" maxlength="12" />
+      </view>
+    </view>
+  </view>
+  
+  <!-- 提交按钮 -->
+  <view class="submit-section">
+    <button class="submit-btn {{isFormValid ? '' : 'disabled'}}" bindtap="saveUserInfo" disabled="{{!isFormValid}}">保存</button>
+  </view>
+</view> 

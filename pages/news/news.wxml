@@ -1,0 +1,88 @@
+<!--pages/news/news.wxml-->
+<view class="container">
+  <!-- 头部搜索栏 -->
+  <view class="header">
+    <view class="search-box">
+      <input type="text" 
+        class="search-input" 
+        placeholder="搜索运动资讯" 
+        value="{{searchValue}}" 
+        bindinput="searchNews"/>
+      <image class="search-icon" src="https://img.icons8.com/ios/50/000000/search--v1.png"></image>
+    </view>
+  </view>
+  
+  <!-- 分类标签栏 -->
+  <view class="category-tabs">
+    <scroll-view scroll-x class="tabs-scroll">
+      <view class="tabs">
+        <view 
+          wx:for="{{categories}}" 
+          wx:key="id"
+          class="tab-item {{activeTab === index ? 'active' : ''}}"
+          bindtap="switchCategory"
+          data-id="{{item.id}}">
+          {{item.name}}
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  
+  <!-- 资讯列表 -->
+  <view class="news-container">
+    <!-- 资讯列表项 -->
+    <view 
+      wx:for="{{newsList}}" 
+      wx:key="id" 
+      class="news-item"
+      bindtap="viewNewsDetail"
+      data-id="{{item.id}}">
+      <image class="news-image" src="{{item.image}}"></image>
+      <view class="news-content">
+        <view class="news-title">{{item.title}}</view>
+        <view class="news-meta">
+          <text class="news-date">{{item.date}}</text>
+          <text class="news-views">{{item.views}} 阅读</text>
+        </view>
+        <view class="news-summary">{{item.content}}</view>
+        <view class="news-author">
+          <image class="author-avatar" src="https://img.icons8.com/color/48/000000/user-male-circle--v1.png"></image>
+          <text class="author-name">{{item.source}}</text>
+        </view>
+        <view class="news-actions">
+          <view class="action-btn">
+            <image src="https://img.icons8.com/ios/50/000000/like--v1.png"></image>
+            <text>1.5k</text>
+          </view>
+          <view class="action-btn">
+            <image src="https://img.icons8.com/ios/50/000000/comments--v1.png"></image>
+            <text>24</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 分隔线 -->
+    <view class="divider"></view>
+    
+    <!-- 推荐文章 -->
+    <view class="recommended-section">
+      <view class="section-header">
+        <text class="section-title">推荐阅读</text>
+        <text class="section-more">更多详情</text>
+      </view>
+      
+      <view class="recommended-item" bindtap="viewNewsDetail" data-id="{{hotNews.id}}">
+        <image class="recommended-image" src="{{hotNews.image}}"></image>
+        <view class="recommended-content">
+          <view class="recommended-title">{{hotNews.title}}</view>
+          <view class="recommended-summary">{{hotNews.summary}}</view>
+          <view class="news-meta">
+            <text class="news-date">{{hotNews.date}}</text>
+            <text class="news-views">{{hotNews.views}} 阅读</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

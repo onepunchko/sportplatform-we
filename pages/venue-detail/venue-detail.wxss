@@ -1,0 +1,301 @@
+/* pages/venue-detail/venue-detail.wxss */
+.container {
+  padding-bottom: 160rpx;
+  background-color: #f8f8f8;
+}
+
+/* 场馆图片 */
+.venue-image {
+  width: 100%;
+  height: 420rpx;
+}
+
+/* 场馆信息 */
+.venue-info {
+  padding: 30rpx;
+  background-color: #ffffff;
+  margin-bottom: 20rpx;
+}
+
+.venue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.venue-name {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.venue-status {
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+}
+
+.venue-status.open {
+  background-color: rgba(40, 205, 122, 0.1);
+  color: #28cd7a;
+}
+
+.venue-status.closed {
+  background-color: #f5f5f5;
+  color: #999;
+}
+
+.venue-address, .venue-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+
+.rating-value {
+  color: #ff9500;
+  font-weight: bold;
+  margin-right: 4rpx;
+}
+
+.rating-count {
+  color: #999;
+}
+
+.venue-price {
+  margin-top: 20rpx;
+}
+
+.price-value {
+  font-size: 32rpx;
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+/* 内容区块 */
+.section {
+  padding: 30rpx;
+  background-color: #ffffff;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.section-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 设施列表 */
+.facility-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.facility-item {
+  padding: 10rpx 20rpx;
+  background-color: #f5f5f5;
+  border-radius: 30rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 24rpx;
+}
+
+/* 规则列表 */
+.rule-item {
+  margin-bottom: 16rpx;
+}
+
+/* 日期选择器 */
+.date-selector-wrapper {
+  position: relative;
+  margin-bottom: 30rpx;
+}
+
+.date-selector {
+  display: flex;
+  overflow-x: auto;
+  padding: 0 10rpx;
+  position: relative;
+  white-space: nowrap;
+  height: 120rpx;
+}
+
+.date-selector::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-indicator {
+  position: absolute;
+  top: 0;
+  width: 40rpx;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.slider-indicator.left {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.slider-indicator.right {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.date-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  margin-right: 20rpx;
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  min-width: 120rpx;
+  height: 80rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.date-item.active {
+  background-color: #4285f4;
+  transform: scale(1.05);
+  box-shadow: 0 4rpx 10rpx rgba(66, 133, 244, 0.3);
+}
+
+.date-day {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.date-date {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-top: 8rpx;
+}
+
+.date-item.active .date-day, 
+.date-item.active .date-date {
+  color: #ffffff;
+}
+
+/* 时段列表 */
+.timeslots {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeslot-group {
+  margin-bottom: 30rpx;
+}
+
+.timeslot-group-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16rpx;
+  padding-left: 16rpx;
+  border-left: 4rpx solid #4285f4;
+}
+
+.timeslot-group-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeslot-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 30rpx;
+  background-color: #f9f9f9;
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.timeslot-item.selected {
+  background-color: #e6f0ff;
+  border: 1rpx solid #4285f4;
+  transform: scale(1.02);
+  box-shadow: 0 4rpx 10rpx rgba(66, 133, 244, 0.2);
+}
+
+.timeslot-item.disabled {
+  opacity: 0.6;
+}
+
+.timeslot-time {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.timeslot-status {
+  font-size: 24rpx;
+  color: #28cd7a;
+  padding: 4rpx 12rpx;
+  background-color: rgba(40, 205, 122, 0.1);
+  border-radius: 20rpx;
+}
+
+.timeslot-item.disabled .timeslot-status {
+  color: #999;
+  background-color: #f2f2f2;
+}
+
+.timeslot-price {
+  font-size: 28rpx;
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+.empty-timeslots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 底部按钮 */
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 30rpx;
+  background-color: #ffffff;
+  box-shadow: 0 -4rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.btn-reserve {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 45rpx;
+  background-color: #4285f4;
+  color: #ffffff;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.btn-reserve.disabled {
+  background-color: #cccccc;
+} 

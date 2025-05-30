@@ -1,0 +1,428 @@
+/* pages/reservation/reservation.wxss */
+.container {
+  padding: 0 30rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.search-icon, .my-reservation-icon {
+  width: 50rpx;
+  height: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-reservation-icon {
+  margin-right: 20rpx;
+}
+
+.search-icon image, .my-reservation-icon image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.filter-tabs {
+  margin: 30rpx 0;
+  width: 100%;
+}
+
+.filter-scroll {
+  white-space: nowrap;
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.filter-item {
+  display: inline-block;
+  padding: 0 30rpx;
+  margin-right: 16rpx;
+  background-color: #f2f2f2;
+  color: #333;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+}
+
+.filter-item.active {
+  background-color: #4285f4;
+  color: white;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.venue-list {
+  padding-bottom: 30rpx;
+}
+
+.venue-card {
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.venue-image {
+  width: 100%;
+  height: 320rpx;
+}
+
+.venue-info {
+  padding: 20rpx;
+}
+
+.venue-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.venue-location {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.location-icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 6rpx;
+}
+
+.venue-rating {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+}
+
+.star-icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 6rpx;
+}
+
+.rating-value {
+  color: #ff9500;
+  font-weight: bold;
+  margin-right: 4rpx;
+}
+
+.rating-count {
+  color: #999;
+  margin-right: 20rpx;
+}
+
+.venue-price {
+  color: #ff6b6b;
+}
+
+.venue-status {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+}
+
+.venue-status.open {
+  background-color: rgba(40, 205, 122, 0.1);
+  color: #28cd7a;
+}
+
+.venue-status.closed {
+  background-color: #f5f5f5;
+  color: #999;
+}
+
+.my-reservations {
+  padding-top: 20rpx;
+}
+
+.reservation-item {
+  padding: 30rpx;
+}
+
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.reservation-venue {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.reservation-status {
+  font-size: 24rpx;
+  color: #3370FF;
+  padding: 6rpx 16rpx;
+  background-color: #e3f0ff;
+  border-radius: 20rpx;
+}
+
+.reservation-time {
+  display: flex;
+  margin-bottom: 30rpx;
+}
+
+.reservation-date {
+  font-size: 28rpx;
+  margin-right: 20rpx;
+}
+
+.reservation-hour {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.reservation-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-cancel, .btn-detail {
+  margin-left: 20rpx;
+  padding: 10rpx 30rpx;
+  font-size: 26rpx;
+  border-radius: 30rpx;
+  line-height: 1.5;
+}
+
+.btn-cancel {
+  background-color: #f5f5f5;
+  color: #999;
+}
+
+.btn-detail {
+  background-color: #e3f0ff;
+  color: #3370FF;
+}
+
+.empty-reservations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 50rpx;
+}
+
+.btn-reserve {
+  background-color: #3370FF;
+  color: #fff;
+  padding: 16rpx 60rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+/* 我的预约弹窗样式 */
+.my-reservations-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.popup-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+}
+
+.popup-content {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 24rpx 24rpx 0 0;
+  z-index: 1002;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.popup-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.popup-close {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.popup-close image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.popup-body {
+  padding: 30rpx;
+  max-height: calc(80vh - 100rpx);
+  overflow-y: auto;
+}
+
+.reservation-item {
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.reservation-venue-info {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.reservation-venue-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+
+.reservation-details {
+  flex: 1;
+}
+
+.reservation-venue-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.reservation-time {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.reservation-date {
+  margin-right: 20rpx;
+}
+
+.reservation-status {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+  font-size: 24rpx;
+  background-color: #e6f0ff;
+  color: #4285f4;
+}
+
+.reservation-status.confirmed {
+  background-color: rgba(40, 205, 122, 0.1);
+  color: #28cd7a;
+}
+
+.reservation-status.cancelled {
+  background-color: #f5f5f5;
+  color: #999;
+}
+
+.reservation-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-cancel {
+  padding: 10rpx 30rpx;
+  background-color: #f5f5f5;
+  color: #ff6b6b;
+  font-size: 26rpx;
+  border-radius: 30rpx;
+  line-height: 1.5;
+  border: none;
+}
+
+.empty-reservations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 0;
+}
+
+.empty-icon {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.empty-tip {
+  font-size: 26rpx;
+  color: #999;
+} 

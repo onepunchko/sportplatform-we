@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园运动 - 场地预约</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .page-content {
+            padding: 15px;
+            padding-top: 60px;
+            padding-bottom: 70px;
+        }
+        
+        .venue-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .venue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .venue-img {
+            height: 120px;
+            object-fit: cover;
+        }
+        
+        .date-scroll {
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .date-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .date-item {
+            min-width: 60px;
+        }
+        
+        .date-item.active {
+            background-color: #3B82F6;
+            color: white;
+        }
+        
+        .time-slot {
+            transition: all 0.2s ease;
+        }
+        
+        .time-slot.available {
+            background-color: #f0f9ff;
+            border: 1px solid #bfdbfe;
+            color: #3B82F6;
+        }
+        
+        .time-slot.available:hover {
+            background-color: #dbeafe;
+        }
+        
+        .time-slot.selected {
+            background-color: #3B82F6;
+            border: 1px solid #2563eb;
+            color: white;
+        }
+        
+        .time-slot.booked {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <!-- 引入顶部状态栏 -->
+    <div id="status-bar"></div>
+    
+    <!-- 页面内容 -->
+    <div class="page-content">
+        <!-- 页面标题 -->
+        <div class="flex justify-between items-center mb-5">
+            <h1 class="text-2xl font-bold">场地预约</h1>
+            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                <i class="fas fa-search text-gray-500"></i>
+            </div>
+        </div>
+        
+        <!-- 场馆分类 -->
+        <div class="flex space-x-3 mb-5 overflow-x-auto pb-2 date-scroll">
+            <button class="px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-medium">全部</button>
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">篮球场</button>
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">羽毛球馆</button>
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">乒乓球室</button>
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">足球场</button>
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium">网球场</button>
+        </div>
+        
+        <!-- 推荐场馆 -->
+        <h2 class="text-lg font-semibold mb-3">附近场馆</h2>
+        <div class="grid grid-cols-1 gap-4 mb-6">
+            <div class="venue-card bg-white">
+                <img src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="篮球场" class="venue-img w-full">
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-bold">西区篮球场</h3>
+                            <p class="text-sm text-gray-500 mt-1"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i> 距离500米</p>
+                        </div>
+                        <div class="px-2 py-1 bg-green-100 text-green-600 rounded text-xs">开放中</div>
+                    </div>
+                    <div class="flex items-center mt-3 text-sm">
+                        <div class="flex items-center mr-3">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>4.8 (125)</span>
+                        </div>
+                        <div class="text-gray-500">￥15/小时</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="venue-card bg-white">
+                <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="羽毛球馆" class="venue-img w-full">
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-bold">中心羽毛球馆</h3>
+                            <p class="text-sm text-gray-500 mt-1"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i> 距离800米</p>
+                        </div>
+                        <div class="px-2 py-1 bg-green-100 text-green-600 rounded text-xs">开放中</div>
+                    </div>
+                    <div class="flex items-center mt-3 text-sm">
+                        <div class="flex items-center mr-3">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>4.6 (98)</span>
+                        </div>
+                        <div class="text-gray-500">￥20/小时</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 预约日期 -->
+        <h2 class="text-lg font-semibold mb-3">选择日期</h2>
+        <div class="flex space-x-3 mb-6 overflow-x-auto pb-2 date-scroll">
+            <div class="date-item flex flex-col items-center p-3 rounded-xl">
+                <p class="text-xs text-gray-500">周一</p>
+                <p class="font-bold my-1">8</p>
+                <p class="text-xs text-gray-500">今天</p>
+            </div>
+            <div class="date-item active flex flex-col items-center p-3 rounded-xl">
+                <p class="text-xs">周二</p>
+                <p class="font-bold my-1">9</p>
+                <p class="text-xs">明天</p>
+            </div>
+            <div class="date-item flex flex-col items-center p-3 rounded-xl">
+                <p class="text-xs text-gray-500">周三</p>
+                <p class="font-bold my-1">10</p>
+                <p class="text-xs text-gray-500">后天</p>
+            </div>
+            <div class="date-item flex flex-col items-center p-3 rounded-xl">
+                <p class="text-xs text-gray-500">周四</p>
+                <p class="font-bold my-1">11</p>
+                <p class="text-xs text-gray-500">5/11</p>
+            </div>
+            <div class="date-item flex flex-col items-center p-3 rounded-xl">
+                <p class="text-xs text-gray-500">周五</p>
+                <p class="font-bold my-1">12</p>
+                <p class="text-xs text-gray-500">5/12</p>
+            </div>
+            <div class="date-item flex flex-col items-center p-3 rounded-xl">
+                <p class="text-xs text-gray-500">周六</p>
+                <p class="font-bold my-1">13</p>
+                <p class="text-xs text-gray-500">5/13</p>
+            </div>
+            <div class="date-item flex flex-col items-center p-3 rounded-xl">
+                <p class="text-xs text-gray-500">周日</p>
+                <p class="font-bold my-1">14</p>
+                <p class="text-xs text-gray-500">5/14</p>
+            </div>
+        </div>
+        
+        <!-- 时间段选择 -->
+        <h2 class="text-lg font-semibold mb-3">选择时间段</h2>
+        <div class="grid grid-cols-3 gap-3 mb-8">
+            <div class="time-slot booked rounded-lg py-3 px-2 text-center">
+                <p class="text-sm">08:00-09:00</p>
+                <p class="text-xs mt-1">已预约</p>
+            </div>
+            <div class="time-slot booked rounded-lg py-3 px-2 text-center">
+                <p class="text-sm">09:00-10:00</p>
+                <p class="text-xs mt-1">已预约</p>
+            </div>
+            <div class="time-slot available rounded-lg py-3 px-2 text-center">
+                <p class="text-sm">10:00-11:00</p>
+                <p class="text-xs mt-1">可预约</p>
+            </div>
+            <div class="time-slot available rounded-lg py-3 px-2 text-center">
+                <p class="text-sm">11:00-12:00</p>
+                <p class="text-xs mt-1">可预约</p>
+            </div>
+            <div class="time-slot booked rounded-lg py-3 px-2 text-center">
+                <p class="text-sm">12:00-13:00</p>
+                <p class="text-xs mt-1">已预约</p>
+            </div>
+            <div class="time-slot booked rounded-lg py-3 px-2 text-center">
+                <p class="text-sm">13:00-14:00</p>
+                <p class="text-xs mt-1">已预约</p>
+            </div>
+            <div class="time-slot available rounded-lg py-3 px-2 text-center">
+                <p class="text-sm">14:00-15:00</p>
+                <p class="text-xs mt-1">可预约</p>
+            </div>
+            <div class="time-slot selected rounded-lg py-3 px-2 text-center">
+                <p class="text-sm">15:00-16:00</p>
+                <p class="text-xs mt-1">已选择</p>
+            </div>
+            <div class="time-slot available rounded-lg py-3 px-2 text-center">
+                <p class="text-sm">16:00-17:00</p>
+                <p class="text-xs mt-1">可预约</p>
+            </div>
+        </div>
+        
+        <!-- 预约按钮 -->
+        <button class="w-full py-4 bg-blue-500 text-white rounded-full text-lg font-bold shadow-lg">
+            确认预约
+        </button>
+    </div>
+    
+    <!-- 引入底部导航栏 -->
+    <div id="tab-bar"></div>
+    
+    <script>
+        // 加载共用组件
+        fetch('../components/common.html')
+            .then(response => response.text())
+            .then(data => {
+                // 插入顶部状态栏和底部导航栏
+                const parser = new DOMParser();
+                const htmlDoc = parser.parseFromString(data, 'text/html');
+                
+                // 获取状态栏
+                const statusBar = htmlDoc.querySelector('.ios-status-bar');
+                document.getElementById('status-bar').appendChild(statusBar);
+                
+                // 获取底部导航栏
+                const tabBar = htmlDoc.querySelector('.tab-bar');
+                document.getElementById('tab-bar').appendChild(tabBar);
+                
+                // 设置场地预约页导航为激活状态
+                const reservationTab = document.querySelector('.tab-item[href="reservation.html"]');
+                if (reservationTab) {
+                    reservationTab.classList.add('active');
+                }
+            });
+            
+        // 时间段选择
+        document.addEventListener('DOMContentLoaded', function() {
+            const availableSlots = document.querySelectorAll('.time-slot.available');
+            availableSlots.forEach(slot => {
+                slot.addEventListener('click', function() {
+                    // 取消已选择的时间
+                    const selectedSlot = document.querySelector('.time-slot.selected');
+                    if (selectedSlot) {
+                        selectedSlot.classList.remove('selected');
+                        selectedSlot.classList.add('available');
+                        const slotText = selectedSlot.querySelector('p:last-child');
+                        if (slotText) slotText.textContent = '可预约';
+                    }
+                    
+                    // 设置新选择的时间
+                    this.classList.remove('available');
+                    this.classList.add('selected');
+                    const thisText = this.querySelector('p:last-child');
+                    if (thisText) thisText.textContent = '已选择';
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园运动 - AI教练</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .page-content {
+            padding: 15px;
+            padding-top: 60px;
+            padding-bottom: 70px;
+        }
+        
+        .coach-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .coach-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .workout-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .workout-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .workout-banner {
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .workout-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 15px;
+            color: white;
+        }
+        
+        .chat-container {
+            border-radius: 20px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            padding: 15px;
+            background-color: #3B82F6;
+            color: white;
+        }
+        
+        .chat-messages {
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+        }
+        
+        .message.user {
+            justify-content: flex-end;
+        }
+        
+        .message-content {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 70%;
+        }
+        
+        .message.ai .message-content {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        
+        .message.user .message-content {
+            background-color: #3B82F6;
+            color: white;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 10px 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 10px;
+            border-radius: 20px;
+            background-color: #f3f4f6;
+        }
+        
+        .send-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #3B82F6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+        }
+        
+        .ai-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background-color: #3B82F6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 引入顶部状态栏 -->
+    <div id="status-bar"></div>
+    
+    <!-- 页面内容 -->
+    <div class="page-content">
+        <!-- 页面标题 -->
+        <div class="flex justify-between items-center mb-5">
+            <h1 class="text-2xl font-bold">AI运动教练</h1>
+            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                <i class="fas fa-history text-gray-500"></i>
+            </div>
+        </div>
+        
+        <!-- AI教练卡片 -->
+        <div class="coach-card bg-white p-4 mb-5 flex items-center">
+            <div class="ai-avatar mr-4">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="flex-1">
+                <h2 class="font-bold text-lg">运动小助手</h2>
+                <p class="text-sm text-gray-500">随时为你提供专业的运动建议和指导</p>
+            </div>
+        </div>
+        
+        <!-- 聊天框 -->
+        <div class="chat-container mb-5">
+            <div class="chat-header">
+                <h3 class="font-semibold">运动小助手</h3>
+            </div>
+            <div class="chat-messages">
+                <div class="message ai">
+                    <div class="message-content">
+                        <p>你好！我是你的AI运动教练，很高兴为你提供专业运动指导。请问你今天想了解什么样的运动知识或需要什么帮助？</p>
+                    </div>
+                </div>
+                
+                <div class="message user">
+                    <div class="message-content">
+                        <p>我想要一个增肌训练计划，每周3-4天。</p>
+                    </div>
+                </div>
+                
+                <div class="message ai">
+                    <div class="message-content">
+                        <p>很好的选择！根据你的需求，我为你制定了一个每周3-4天的增肌训练计划：</p>
+                        <p class="mt-2"><strong>周一：胸部和肱三头肌</strong></p>
+                        <ul class="list-disc pl-5 mt-1 text-sm">
+                            <li>卧推：4组×8-10次</li>
+                            <li>哑铃飞鸟：3组×12次</li>
+                            <li>器械胸推：3组×12次</li>
+                            <li>绳索下压：3组×12次</li>
+                            <li>哑铃颈后臂屈伸：3组×12次</li>
+                        </ul>
+                        <p class="mt-2"><strong>周三：背部和肱二头肌</strong></p>
+                        <ul class="list-disc pl-5 mt-1 text-sm">
+                            <li>引体向上：4组×最大次数</li>
+                            <li>坐姿划船：4组×10次</li>
+                            <li>俯身哑铃划船：3组×12次</li>
+                            <li>杠铃弯举：3组×10次</li>
+                            <li>锤式弯举：3组×12次</li>
+                        </ul>
+                        <p class="mt-2"><strong>周五：腿部和肩部</strong></p>
+                        <ul class="list-disc pl-5 mt-1 text-sm">
+                            <li>深蹲：4组×8-10次</li>
+                            <li>腿举：3组×12次</li>
+                            <li>腿屈伸：3组×15次</li>
+                            <li>哑铃肩推：4组×10次</li>
+                            <li>侧平举：3组×12次</li>
+                        </ul>
+                        <p class="mt-2">每次训练前记得先做5-10分钟的有氧热身，训练后进行拉伸。如果你是初学者，建议先从较轻的重量开始，逐渐增加。</p>
+                    </div>
+                </div>
+                
+                <div class="message user">
+                    <div class="message-content">
+                        <p>谢谢！这个计划看起来很棒。饮食方面有什么建议吗？</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" placeholder="输入你的问题...">
+                <button class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 推荐训练 -->
+        <h2 class="text-lg font-semibold mb-3">为你推荐</h2>
+        <div class="grid grid-cols-1 gap-4 mb-5">
+            <div class="workout-card bg-white">
+                <div class="workout-banner" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    <div class="workout-overlay">
+                        <div>
+                            <h3 class="font-bold">初学者全身训练计划</h3>
+                            <p class="text-sm opacity-80">20分钟 · 简单</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex items-center text-sm text-gray-500 mb-3">
+                        <span class="mr-3"><i class="fas fa-fire mr-1"></i> 250千卡</span>
+                        <span><i class="fas fa-users mr-1"></i> 5,642人已完成</span>
+                    </div>
+                    <p class="text-sm text-gray-600">适合初学者的全身训练计划，无需器械，随时随地轻松锻炼。</p>
+                    <button class="mt-3 w-full py-2 bg-blue-500 text-white rounded-full text-sm">查看详情</button>
+                </div>
+            </div>
+            
+            <div class="workout-card bg-white">
+                <div class="workout-banner" style="background-image: url('https://images.unsplash.com/photo-1434608519344-49d77a699e1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                    <div class="workout-overlay">
+                        <div>
+                            <h3 class="font-bold">30天腹肌训练挑战</h3>
+                            <p class="text-sm opacity-80">15分钟/天 · 中等</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex items-center text-sm text-gray-500 mb-3">
+                        <span class="mr-3"><i class="fas fa-fire mr-1"></i> 180千卡/天</span>
+                        <span><i class="fas fa-users mr-1"></i> 3,289人已完成</span>
+                    </div>
+                    <p class="text-sm text-gray-600">30天腹肌训练挑战，循序渐进，每天只需15分钟，快速打造完美腹肌。</p>
+                    <button class="mt-3 w-full py-2 bg-blue-500 text-white rounded-full text-sm">查看详情</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 常见问题 -->
+        <h2 class="text-lg font-semibold mb-3">常见问题</h2>
+        <div class="bg-white rounded-xl p-4 mb-5">
+            <div class="space-y-3">
+                <button class="w-full text-left flex justify-between items-center py-2 border-b border-gray-100">
+                    <span class="text-sm">如何制定适合自己的训练计划？</span>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+                <button class="w-full text-left flex justify-between items-center py-2 border-b border-gray-100">
+                    <span class="text-sm">增肌和减脂应该如何平衡饮食？</span>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+                <button class="w-full text-left flex justify-between items-center py-2 border-b border-gray-100">
+                    <span class="text-sm">健身初学者应该注意哪些事项？</span>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+                <button class="w-full text-left flex justify-between items-center py-2">
+                    <span class="text-sm">如何避免运动损伤？</span>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 引入底部导航栏 -->
+    <div id="tab-bar"></div>
+    
+    <script>
+        // 加载共用组件
+        fetch('../components/common.html')
+            .then(response => response.text())
+            .then(data => {
+                // 插入顶部状态栏和底部导航栏
+                const parser = new DOMParser();
+                const htmlDoc = parser.parseFromString(data, 'text/html');
+                
+                // 获取状态栏
+                const statusBar = htmlDoc.querySelector('.ios-status-bar');
+                document.getElementById('status-bar').appendChild(statusBar);
+                
+                // 获取底部导航栏
+                const tabBar = htmlDoc.querySelector('.tab-bar');
+                document.getElementById('tab-bar').appendChild(tabBar);
+            });
+            
+        // 聊天功能简单交互
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatInput = document.querySelector('.chat-input input');
+            const sendBtn = document.querySelector('.send-btn');
+            const chatMessages = document.querySelector('.chat-messages');
+            
+            // 发送消息
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    // 添加用户消息
+                    const userMessageHtml = `
+                        <div class="message user">
+                            <div class="message-content">
+                                <p>${message}</p>
+                            </div>
+                        </div>
+                    `;
+                    chatMessages.insertAdjacentHTML('beforeend', userMessageHtml);
+                    
+                    // 清空输入框
+                    chatInput.value = '';
+                    
+                    // 自动滚动到底部
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // 模拟AI回复
+                    setTimeout(() => {
+                        const aiMessageHtml = `
+                            <div class="message ai">
+                                <div class="message-content">
+                                    <p>关于饮食建议，增肌期间需要保持热量盈余，每天摄入比消耗多300-500卡路里。确保每天摄入足够的蛋白质（体重每公斤1.6-2.2克）。碳水化合物要充足，尤其是训练前后。健康脂肪也很重要，约占每日总热量的25-30%。多喝水，保持充分水分。建议每天分5-6餐进食，包括训练前后的营养补充。如需更详细的饮食计划，我可以根据你的具体情况为你制定。</p>
+                                </div>
+                            </div>
+                        `;
+                        chatMessages.insertAdjacentHTML('beforeend', aiMessageHtml);
+                        
+                        // 自动滚动到底部
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                }
+            }
+            
+            // 点击发送按钮
+            sendBtn.addEventListener('click', sendMessage);
+            
+            // 按回车键发送
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

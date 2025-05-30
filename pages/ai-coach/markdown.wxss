@@ -1,0 +1,202 @@
+/* Markdown样式 */
+
+/* 标题样式 */
+.md-h1 {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin: 30rpx 0 20rpx;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10rpx;
+}
+
+.md-h2 {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin: 26rpx 0 18rpx;
+  color: #333;
+}
+
+.md-h3 {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin: 22rpx 0 16rpx;
+  color: #333;
+}
+
+.md-h4 {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin: 20rpx 0 14rpx;
+  color: #333;
+}
+
+.md-h5 {
+  font-size: 26rpx;
+  font-weight: bold;
+  margin: 18rpx 0 12rpx;
+  color: #333;
+}
+
+.md-h6 {
+  font-size: 24rpx;
+  font-weight: bold;
+  margin: 16rpx 0 10rpx;
+  color: #333;
+}
+
+/* 段落样式 */
+.md-p {
+  font-size: 28rpx;
+  line-height: 1.6;
+  margin: 16rpx 0;
+  color: #333;
+}
+
+/* 列表样式 */
+.md-ul, .md-ol {
+  padding-left: 40rpx;
+  margin: 16rpx 0;
+}
+
+.md-li {
+  font-size: 28rpx;
+  line-height: 1.6;
+  margin: 8rpx 0;
+  color: #333;
+}
+
+/* 引用块样式 */
+.md-blockquote {
+  border-left: 8rpx solid #ddd;
+  padding: 16rpx 20rpx;
+  margin: 16rpx 0;
+  background-color: #f8f9fa;
+  color: #444;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+/* 行内样式 */
+.rich-text strong {
+  font-weight: bold;
+}
+
+.rich-text em {
+  font-style: italic;
+}
+
+.rich-text code {
+  font-family: monospace;
+  background-color: #f0f0f0;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+  font-size: 26rpx;
+}
+
+.rich-text a {
+  color: #3370FF;
+  text-decoration: underline;
+}
+
+/* 表格样式 */
+.md-table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20rpx 0;
+}
+
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 26rpx;
+  border: 1px solid #ddd;
+}
+
+.md-table th, .md-table td {
+  padding: 16rpx;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.md-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.md-table td {
+  background-color: #fff;
+}
+
+/* 表格对齐方式 */
+.md-align-left {
+  text-align: left;
+}
+
+.md-align-center {
+  text-align: center;
+}
+
+.md-align-right {
+  text-align: right;
+}
+
+/* 适配小程序rich-text组件 */
+.rich-text-md {
+  width: 100%;
+}
+
+.rich-text-md h1, .rich-text-md h2, .rich-text-md h3, 
+.rich-text-md h4, .rich-text-md h5, .rich-text-md h6 {
+  font-weight: bold;
+  margin: 10rpx 0;
+}
+
+.rich-text-md h1 {
+  font-size: 36rpx;
+}
+
+.rich-text-md h2 {
+  font-size: 34rpx;
+}
+
+.rich-text-md h3 {
+  font-size: 32rpx;
+}
+
+.rich-text-md table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16rpx 0;
+}
+
+.rich-text-md table, .rich-text-md th, .rich-text-md td {
+  border: 1px solid #ddd;
+}
+
+.rich-text-md th, .rich-text-md td {
+  padding: 8rpx 16rpx;
+  text-align: left;
+}
+
+.rich-text-md th {
+  background-color: #f8f9fa;
+}
+
+/* 代码区块 */
+.rich-text-md pre {
+  background-color: #f5f5f5;
+  padding: 16rpx;
+  border-radius: 8rpx;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 26rpx;
+  margin: 16rpx 0;
+}
+
+/* 分隔线 */
+.rich-text-md hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 20rpx 0;
+} 

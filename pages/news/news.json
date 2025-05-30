@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "运动资讯",
+  "usingComponents": {},
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+} 

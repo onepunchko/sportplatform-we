@@ -1,0 +1,167 @@
+<!-- pages/tracking/tracking.wxml -->
+<view class="container">
+  <view class="goal-section">
+    <view class="goal-header">
+      <text class="title">今日目标</text>
+      <text class="edit-btn">编辑</text>
+    </view>
+    
+    <view class="goal-progress">
+      <view class="progress-circle">
+        <view class="progress-text">
+          <text class="percent">{{goal.progress}}%</text>
+          <text class="label">完成度</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="goal-items">
+      <view class="goal-item">
+        <view class="goal-icon blue">
+          <image src="/static/images/tabbar/walk.png"></image>
+        </view>
+        <view class="goal-info">
+          <view class="goal-label">步数</view>
+          <view class="goal-value">
+            <text class="completed">{{goal.steps.completed}}</text>
+            <text class="separator">/</text>
+            <text class="target">{{goal.steps.target}}</text>
+          </view>
+        </view>
+        <view class="goal-progress-bar">
+          <view class="progress-inner" style="width: {{goal.steps.completed/goal.steps.target*100}}%;"></view>
+        </view>
+      </view>
+
+      <view class="goal-item">
+        <view class="goal-icon green">
+          <image src="/static/images/tabbar/distance.png"></image>
+        </view>
+        <view class="goal-info">
+          <view class="goal-label">距离</view>
+          <view class="goal-value">
+            <text class="completed">{{goal.distance.completed}}</text>
+            <text class="separator">/</text>
+            <text class="target">{{goal.distance.target}}公里</text>
+          </view>
+        </view>
+        <view class="goal-progress-bar">
+          <view class="progress-inner" style="width: {{goal.distance.completed/goal.distance.target*100}}%;"></view>
+        </view>
+      </view>
+
+      <view class="goal-item">
+        <view class="goal-icon purple">
+          <image src="/static/images/tabbar/calories.png"></image>
+        </view>
+        <view class="goal-info">
+          <view class="goal-label">卡路里</view>
+          <view class="goal-value">
+            <text class="completed">{{goal.calories.completed}}</text>
+            <text class="separator">/</text>
+            <text class="target">{{goal.calories.target}}千卡</text>
+          </view>
+        </view>
+        <view class="goal-progress-bar">
+          <view class="progress-inner" style="width: {{goal.calories.completed/goal.calories.target*100}}%;"></view>
+        </view>
+      </view>
+
+      <view class="goal-item">
+        <view class="goal-icon orange">
+          <image src="/static/images/tabbar/time.png"></image>
+        </view>
+        <view class="goal-info">
+          <view class="goal-label">运动时长</view>
+          <view class="goal-value">
+            <text class="completed">{{goal.duration.completed}}</text>
+            <text class="separator">/</text>
+            <text class="target">{{goal.duration.target}}分钟</text>
+          </view>
+        </view>
+        <view class="goal-progress-bar">
+          <view class="progress-inner" style="width: {{goal.duration.completed/goal.duration.target*100}}%;"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="stats-section card">
+    <view class="section-header">
+      <text class="title">本周统计</text>
+      <view class="tabs">
+        <text class="tab active">步数</text>
+        <text class="tab">距离</text>
+      </view>
+    </view>
+    
+    <view class="chart-container">
+      <view class="chart-y-axis">
+        <text>12,000</text>
+        <text>9,000</text>
+        <text>6,000</text>
+        <text>3,000</text>
+        <text>0</text>
+      </view>
+      <view class="chart-bars">
+        <block wx:for="{{weekStats}}" wx:key="day">
+          <view class="chart-bar-item">
+            <view class="chart-bar">
+              <view class="chart-bar-inner" style="height: {{item.value / 12000 * 100}}%;"></view>
+            </view>
+            <text class="chart-label">{{item.day}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+    
+    <view class="stats-summary">
+      <view class="summary-item">
+        <text class="summary-label">平均步数</text>
+        <text class="summary-value">9,254</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">总步数</text>
+        <text class="summary-value">64,778</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="recent-section">
+    <view class="section-header">
+      <text class="title">最近记录</text>
+    </view>
+    
+    <view class="recent-list">
+      <view class="recent-item card">
+        <view class="recent-icon">
+          <image src="/static/images/run.png"></image>
+        </view>
+        <view class="recent-info">
+          <view class="recent-title">晨跑</view>
+          <view class="recent-time">今天 7:30</view>
+        </view>
+        <view class="recent-stats">
+          <view class="recent-stat">
+            <text class="stat-value">2.5公里</text>
+            <text class="stat-label">距离</text>
+          </view>
+          <view class="recent-stat">
+            <text class="stat-value">20:15</text>
+            <text class="stat-label">用时</text>
+          </view>
+          <view class="recent-stat">
+            <text class="stat-value">150千卡</text>
+            <text class="stat-label">消耗</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 添加开始记录按钮 -->
+  <view class="start-tracking-btn" bindtap="startTracking">
+    <image class="tracking-icon" src="/static/images/record_icon.png"></image>
+    <text>开始记录</text>
+  </view>
+</view> 

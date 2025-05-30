@@ -1,0 +1,50 @@
+---
+description: 
+globs: app/api/*.py
+alwaysApply: false
+---
+# API路由变更自动化测试规则
+
+## 规则要求
+
+在对`app/api`目录下的任何路由文件进行修改时，必须遵循以下规则：
+
+1. 所有API路由的变更必须进行自动化测试
+2. 测试应覆盖以下方面：
+   - 请求参数验证
+   - 返回值格式验证
+   - 成功和失败场景
+   - 边界条件测试
+
+## 测试执行
+
+1. 修改任何API路由后，必须运行相应的测试套件
+2. 使用项目的测试框架执行测试（例如pytest）
+3. 测试结果必须包含以下信息：
+   - 测试通过/失败状态
+   - 覆盖率报告
+   - 失败用例的详细错误信息
+
+## 结果通知
+
+1. 测试结果必须通过适当的渠道通知开发者：
+   - 控制台输出
+   - 日志文件
+   - 可选：集成到CI/CD流程中的通知
+
+## 相关文件
+
+API路由文件：
+- [venue.py](mdc:app/api/venue.py)
+- [community.py](mdc:app/api/community.py)
+- [ai_coach.py](mdc:app/api/ai_coach.py)
+- [sport.py](mdc:app/api/sport.py)
+- [user.py](mdc:app/api/user.py)
+- [news.py](mdc:app/api/news.py)
+
+## 注意事项
+
+- 编写测试时应当模拟真实环境和用户操作
+- 对于需要外部依赖的测试，应当使用适当的mock策略
+- 测试应当独立且可重复执行
+
